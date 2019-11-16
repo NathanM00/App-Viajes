@@ -7,6 +7,8 @@ function DataReader() {
     const [rows, setRows] = React.useState([]);
     const [rows2, setRows2] = React.useState([]);
     const [selectIndex, setSelectedIndex] = React.useState('');
+
+    //lectura de base de datos de Gente
     React.useEffect(() => {
         async function getData() {
             const response = await fetch('/resources/dataBaseViajes.csv')
@@ -20,6 +22,8 @@ function DataReader() {
         }
         getData()
     }, []) // [] means just do this once, after initial render
+
+    //lectura de base de datos de Destinos
     React.useEffect(() => {
         async function getData() {
             const response = await fetch('/resources/dataBaseDestinos.csv')
@@ -34,12 +38,12 @@ function DataReader() {
         getData()
     }, []) // [] means just do this once, after initial render
 
-
     var newArray = Object.assign(rows);
     var newArray2 = Object.assign(rows2);
     let objetoA;
     let objetoB;
     var nuevosK = [];
+
     const [listaOrdenados, setListaOrdenados] = React.useState([]);
     const [listaDestinos2, setListaDestinos2] = React.useState([]);
     const [listaDestinos3, setListaDestinos3] = React.useState([]);
@@ -52,19 +56,24 @@ function DataReader() {
     if (selectIndex !== '') selected = newArray[selectIndex];
     let perfilGrupal = null;
 
+    //Funciones donde dan los cambios de valor en los inputss
     function handleChange(event) {
         setSelectedIndex(event.target.value);
     }
+
     function handleAcompañantes(event) {
         setIndexLista(event.target.value);
     }
+
     function handleLugares2(event) {
         setIndexLista2(event.target.value);
     }
+
     function handleLugares3(event) {
         setIndexLista3(event.target.value);
     }
 
+    //Funciones donde se hacen las listas y todo el asunto
     function formulaCos() {
         objetoA = Object.values(selected).slice(1);
 
@@ -194,7 +203,6 @@ function DataReader() {
         setListaDestinos3(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista3));
     }
 
-
     return (
         <div>
 
@@ -212,7 +220,7 @@ function DataReader() {
 
                 </div>}
 
-                <input onChange={handleAcompañantes} type='number' placeholder='Numero de acompañantes'  />
+                <input onChange={handleAcompañantes} type='number' placeholder='Numero de acompañantes' />
                 <button onClick={formulaCos}>Start</button>
 
                 <ul>
@@ -224,7 +232,7 @@ function DataReader() {
 
             <div>
                 <h1>Pregunta 2</h1>
-                <input onChange={handleLugares2} type='number'  placeholder='Numero de lugares recomendados' />
+                <input onChange={handleLugares2} type='number' placeholder='Numero de lugares recomendados' />
                 <button onClick={formulaCos2}>Start</button>
                 <ul>
                     {listaDestinos2.map((item, i) =>
@@ -235,7 +243,7 @@ function DataReader() {
 
             <div>
                 <h1>Pregunta 3</h1>
-                <input onChange={handleLugares3} type='number'  placeholder='Numero de lugares recomendados' />
+                <input onChange={handleLugares3} type='number' placeholder='Numero de lugares recomendados' />
                 <button onClick={formulaCos3}>Start</button>
                 <ul>
                     {listaDestinos3.map((item, i) =>
