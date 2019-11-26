@@ -1,8 +1,11 @@
 import React from 'react'
 import Papa from 'papaparse'
 import { ListItem, List, ListItemAvatar, ListItemText, Divider, Avatar } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
 function DataReader() {
+
+    const classes = useStyles();
 
     const [rows, setRows] = React.useState([]);
     const [rows2, setRows2] = React.useState([]);
@@ -277,7 +280,7 @@ function DataReader() {
         }
         setListaOrdenados4(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista4));
     }
-    
+
     function formulaCos5() {
         objetoA = Object.values(selected5).slice(2);
 
@@ -374,132 +377,289 @@ function DataReader() {
     }
 
     return (
-        <div>
+        <div className={classes.app}>
+            <section className={classes.nav}>
+                <img className={classes.logo} src="/images/logo2.png"></img>
 
-            <div>
-                <h1>Pregunta 1</h1>
-                <p>Selecciona la persona base</p>
-                <select value={selectIndex} onChange={handleChange}>
-                    <option value="">-</option>
+                <section className={classes.btnConatiner}>
+                    <button className={classes.navButtons}>Personas similares</button>
+                    <button className={classes.navButtons}>Viaje grupal</button>
+                    <button className={classes.navButtons}>Destinos para ti</button>
+                    <button className={classes.navButtons}>Destinos para ti y amigos</button>
+                    <button className={classes.navButtons}>Destinos para amigos</button>
+                    <button className={classes.navButtons}>Tus destinos para los demás</button>
+                    <button className={classes.navButtons}>Música para tus viajes</button>
+                </section>
 
-                    {newArray.map((item, i) =>
-                        <option value={i} key={i}>{item.nombres}</option>
-                    )}
-                </select>
-                {selected && <div>
-                    {selected.nombres}
+            </section>
 
-                </div>}
-                <p>Selecciona el numero de acompañantes</p>
-                <input onChange={handleAcompañantes} type='number' placeholder='Numero de acompañantes' />
-                <button onClick={formulaCos}>Start</button>
-                <p>Acompañantes recomendados</p>
-                <ul>
-                    {listaOrdenados.map((item, i) =>
-                        <li>{item.persona}{item.valorK}</li>
-                    )}
-                </ul>
-            </div>
+            <section className={classes.window}>
 
-            <div>
-                <h1>Pregunta 2</h1>
-                <p>Segun el grupo de personas anterior, selecciona el numero de lugares</p>
-                <input onChange={handleLugares2} type='number' placeholder='Numero de lugares recomendados' />
-                <button onClick={formulaCos2}>Start</button>
-                <p>Destinos recomendados</p>
-                <ul>
-                    {listaDestinos2.map((item, i) =>
-                        <li>{item.destino}{item.valorK}</li>
-                    )}
-                </ul>
-            </div>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
 
-            <div>
-                <h1>Pregunta 3</h1>
-                <p>Selecciona la persona base</p>
-                <select value={selectIndex3} onChange={handleChange3}>
-                    <option value="">-</option>
+                        <input />
+                    </section>
 
-                    {newArray.map((item, i) =>
-                        <option value={i} key={i}>{item.nombres}</option>
-                    )}
-                </select>
-                {selected3 && <div>
-                    {selected3.nombres}
-                </div>}
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
 
-                <p>Selecciona el numero de destinos</p>
-                <input onChange={handleLugares3} type='number' placeholder='Numero de lugares recomendados' />
-                <button onClick={formulaCos3}>Start</button>
-                <p>Destinos recomendados</p>
-                <ul>
-                    {listaDestinos3.map((item, i) =>
-                        <li>{item.destino}{item.valorK}</li>
-                    )}
-                </ul>
-            </div>
+                        <input />
+                    </section>
+                </div>
 
-            <div>
-                <h1>Pregunta 4</h1>
-                <p>Selecciona el destino base</p>
-                <select value={selectIndex4} onChange={handleChange4}>
-                    <option value="">-</option>
+                <section className={classes.infoVisualization}>
+                    <div>
+                        <h1>Pregunta 1</h1>
+                        <p>Selecciona la persona base</p>
+                        <select value={selectIndex} onChange={handleChange}>
+                            <option value="">-</option>
 
-                    {newArray2.map((item, i) =>
-                        <option value={i} key={i}>{item.Destino}</option>
-                    )}
-                </select>
-                {selected4 && <div>
-                    {selected4.Destino}
+                            {newArray.map((item, i) =>
+                                <option value={i} key={i}>{item.nombres}</option>
+                            )}
+                        </select>
+                        {selected && <div>
+                            {selected.nombres}
 
-                </div>}
+                        </div>}
+                        <p>Selecciona el numero de acompañantes</p>
+                        <input onChange={handleAcompañantes} type='number' placeholder='Numero de acompañantes' />
+                        <button onClick={formulaCos}>Start</button>
+                        <p>Acompañantes recomendados</p>
+                        <ul>
+                            {listaOrdenados.map((item, i) =>
+                                <li>{item.persona}{item.valorK}</li>
+                            )}
+                        </ul>
+                    </div>
 
-                <p>Selecciona el numero de personas</p>
-                <input onChange={handleAcompañantes4} type='number' placeholder='Numero de personas' />
-                <button onClick={formulaCos4}>Start</button>
-                <p>Personas recomendadas</p>
-                <ul>
-                    {listaOrdenados4.map((item, i) =>
-                        <li>{item.persona}{item.valorK}</li>
-                    )}
-                </ul>
-            </div>
+                    <div>
+                        <h1>Pregunta 2</h1>
+                        <p>Segun el grupo de personas anterior, selecciona el numero de lugares</p>
+                        <input onChange={handleLugares2} type='number' placeholder='Numero de lugares recomendados' />
+                        <button onClick={formulaCos2}>Start</button>
+                        <p>Destinos recomendados</p>
+                        <ul>
+                            {listaDestinos2.map((item, i) =>
+                                <li>{item.destino}{item.valorK}</li>
+                            )}
+                        </ul>
+                    </div>
 
-            <div>
-                <h1>Pregunta 5</h1>
-                <p>Selecciona el destino base</p>
-                <select value={selectIndex5} onChange={handleChange5}>
-                    <option value="">-</option>
+                    <div>
+                        <h1>Pregunta 3</h1>
+                        <p>Selecciona la persona base</p>
+                        <select value={selectIndex3} onChange={handleChange3}>
+                            <option value="">-</option>
 
-                    {newArray2.map((item, i) =>
-                        <option value={i} key={i}>{item.Destino}</option>
-                    )}
-                </select>
-                {selected5 && <div>
-                    {selected5.Destino}
+                            {newArray.map((item, i) =>
+                                <option value={i} key={i}>{item.nombres}</option>
+                            )}
+                        </select>
+                        {selected3 && <div>
+                            {selected3.nombres}
+                        </div>}
 
-                </div>}
-                <p>Selecciona el numero de destinos similares</p>
-                <input onChange={handleLugares5} type='number' placeholder='Numero de destinos similares' />
-                <button onClick={formulaCos5}>Start</button>
-                <p>Destinos Similares</p>
-                <ul>
-                    {listaDestinos5.map((item, i) =>
-                        <li>{item.destino}{item.valorK}</li>
-                    )}
-                </ul>
-                <p>Selecciona el numero de personas</p>
-                <input onChange={handleAcompañantes5} type='number' placeholder='Numero de personas' />
-                <button onClick={formulaCos5b}>Start</button>
-                <p>Posibles Interesados</p>
-                <ul>
-                    {listaOrdenados5.map((item, i) =>
-                        <li>{item.persona}{item.valorK}</li>
-                    )}
-                </ul>
-            </div>
+                        <p>Selecciona el numero de destinos</p>
+                        <input onChange={handleLugares3} type='number' placeholder='Numero de lugares recomendados' />
+                        <button onClick={formulaCos3}>Start</button>
+                        <p>Destinos recomendados</p>
+                        <ul>
+                            {listaDestinos3.map((item, i) =>
+                                <li>{item.destino}{item.valorK}</li>
+                            )}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h1>Pregunta 4</h1>
+                        <p>Selecciona el destino base</p>
+                        <select value={selectIndex4} onChange={handleChange4}>
+                            <option value="">-</option>
+
+                            {newArray2.map((item, i) =>
+                                <option value={i} key={i}>{item.Destino}</option>
+                            )}
+                        </select>
+                        {selected4 && <div>
+                            {selected4.Destino}
+
+                        </div>}
+
+                        <p>Selecciona el numero de personas</p>
+                        <input onChange={handleAcompañantes4} type='number' placeholder='Numero de personas' />
+                        <button onClick={formulaCos4}>Start</button>
+                        <p>Personas recomendadas</p>
+                        <ul>
+                            {listaOrdenados4.map((item, i) =>
+                                <li>{item.persona}{item.valorK}</li>
+                            )}
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h1>Pregunta 5</h1>
+                        <p>Selecciona el destino base</p>
+                        <select value={selectIndex5} onChange={handleChange5}>
+                            <option value="">-</option>
+
+                            {newArray2.map((item, i) =>
+                                <option value={i} key={i}>{item.Destino}</option>
+                            )}
+                        </select>
+                        {selected5 && <div>
+                            {selected5.Destino}
+
+                        </div>}
+                        <p>Selecciona el numero de destinos similares</p>
+                        <input onChange={handleLugares5} type='number' placeholder='Numero de destinos similares' />
+                        <button onClick={formulaCos5}>Start</button>
+                        <p>Destinos Similares</p>
+                        <ul>
+                            {listaDestinos5.map((item, i) =>
+                                <li>{item.destino}{item.valorK}</li>
+                            )}
+                        </ul>
+                        <p>Selecciona el numero de personas</p>
+                        <input onChange={handleAcompañantes5} type='number' placeholder='Numero de personas' />
+                        <button onClick={formulaCos5b}>Start</button>
+                        <p>Posibles Interesados</p>
+                        <ul>
+                            {listaOrdenados5.map((item, i) =>
+                                <li>{item.persona}{item.valorK}</li>
+                            )}
+                        </ul>
+                    </div>
+                </section>
+
+            </section>
         </div>
     );
 }
+
+const useStyles = makeStyles(theme => ({
+    app: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        height: '100%',
+    },
+
+    nav: {
+        boxSizing: 'border-box',
+        display: ' flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '20%',
+        height: '100%',
+        position: 'fixed',
+        background: '#3E94F9',
+        //paddingLeft: '6px',
+        paddingTop: '20px',
+    },
+
+    logo: {
+        boxSizing: 'content-box',
+        width: 'auto',
+        height: 'auto',
+        marginTop: '30px',
+        marginBottom: '80px',
+
+    },
+
+    btnConatiner: {
+        boxSizing: 'border-box',
+        display: ' flex',
+        flexDirection: 'column',
+        width: '100%',
+        height: '100%',
+        paddingLeft: '6px',
+    },
+
+    navButtons: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        height: '7%',
+        background: 'none',
+        paddingLeft: '6%',
+
+        color: 'white',
+        border: 'none',
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        //fontWeight: '600',
+        fontSize: '18px',
+        lineHeight: '29px',
+
+        '&:hover': {
+            background: "#FFDA15",
+            color: '#3E94F9',
+            fontWeight: '600',
+        },
+    },
+
+    window: {
+        boxSizing: 'border-box',
+        padding: '20px',
+        width: '80%',
+        height: '100%',
+        marginLeft: '20%',
+        background: '#EDF0F5',
+    },
+
+    inputs: {
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '25px',
+        paddingRight: '25px',
+        width: '100%',
+        height: '120px',
+        background: '#3E94F9',
+        borderRadius: '14px',
+    },
+
+    input: {
+        marginRight: '35px',
+    },
+
+    instruction: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    mandalorian: {
+        width: '10px',
+        height: '10px',
+        background: '#FFDA15',
+        borderRadius: '6px',
+        marginRight: '8px',
+    },
+
+    inputText: {
+        margin: '0',
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        //fontWeight: '600',
+        fontSize: '18px',
+        lineHeight: '29px',
+
+        color: '#FFFFFF',
+
+    },
+
+}));
 
 export default DataReader;
