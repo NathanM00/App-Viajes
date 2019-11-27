@@ -774,33 +774,80 @@ function DataReader(props) {
     }
 
     return (
-        <section >
-            {props.question === 1 && <div>
-                <h1>Pregunta 1</h1>
-                <p>Selecciona la persona base</p>
-                <select value={selectIndex} onChange={handleChange}>
-                    <option value="">-</option>
+        <section className={classes.main}>
+            {props.question === 1 && <div className={classes.main}>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
 
-                    {newArray.map((item, i) =>
-                        <option value={i} key={i}>{item.nombres}</option>
-                    )}
-                </select>
-                {selected && <div>
-                    {selected.nombres}
+                        <select value={selectIndex} onChange={handleChange}>
+                            <option value="">-</option>
 
-                </div>}
-                <p>Selecciona el numero de acompañantes</p>
-                <input onChange={handleAcompañantes} type='number' placeholder='Numero de acompañantes' />
-                <button onClick={formulaCos}>Start</button>
-                <p>Acompañantes recomendados</p>
-                <ul>
-                    {listaOrdenados.map((item, i) =>
-                        <li>{item.persona}{item.valorK}</li>
-                    )}
-                </ul>
+                            {newArray.map((item, i) =>
+                                <option value={i} key={i}>{item.nombres}</option>
+                            )}
+                        </select>
+                    </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
+
+                        <input onChange={handleAcompañantes} type='number' placeholder='Numero de acompañantes' />
+                    </section>
+
+                    <button onClick={formulaCos}>Start</button>
+                </div>
+
+                <div className={classes.user}>
+                    {selected && <div className={classes.userInfo}>
+                        <img src=""/>
+                        <section className={classes.text}>
+                            <p className={classes.selectedName}>{selected.nombres}</p>
+                            <p className={classes.message}>Tu y estas personas tienen gustos similares.</p>
+                        </section>
+                    </div>}
+                </div>
+
+                <div className={classes.recomendation}>
+                    <ul className={classes.rcommendedList}>
+                        {listaOrdenados.map((item, i) =>
+                            <div className={classes.listItem}>
+                                <p className={classes.namePersonRecom}>{item.persona}</p>
+                                <p className={classes.similarity}><span className={classes.percentage}>{item.valorK}</span> de similitud</p>
+                            </div>
+                        )}
+                    </ul>
+                </div>
+
             </div>
             }
             {props.question === 2 && <div>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
+
+                        <input />
+                    </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
+
+                        <input />
+                    </section>
+                </div>
+
                 <h1>Pregunta 2</h1>
                 <p>Selecciona la persona base</p>
                 <select value={selectIndex2} onChange={handleChange2}>
@@ -835,6 +882,26 @@ function DataReader(props) {
             </div>
             }
             {props.question === 3 && <div>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
+
+                        <input />
+                    </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
+
+                        <input />
+                    </section>
+                </div>
+
                 <h1>Pregunta 3</h1>
                 <p>Selecciona la persona base</p>
                 <select value={selectIndex3} onChange={handleChange3}>
@@ -860,6 +927,26 @@ function DataReader(props) {
             </div>
             }
             {props.question === 4 && <div>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
+
+                        <input />
+                    </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
+
+                        <input />
+                    </section>
+                </div>
+
                 <h1>Pregunta 4</h1>
                 <p>Selecciona el destino base</p>
                 <select value={selectIndex4} onChange={handleChange4}>
@@ -886,6 +973,26 @@ function DataReader(props) {
             </div>
             }
             {props.question === 5 && <div>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
+
+                        <input />
+                    </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
+
+                        <input />
+                    </section>
+                </div>
+
                 <h1>Pregunta 5</h1>
                 <p>Selecciona el destino base</p>
                 <select value={selectIndex5} onChange={handleChange5}>
@@ -920,6 +1027,26 @@ function DataReader(props) {
             </div>
             }
             {props.question === 6 && <div>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
+
+                        <input />
+                    </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
+
+                        <input />
+                    </section>
+                </div>
+
                 <h1>Pregunta 6</h1>
                 <p>Selecciona la persona base</p>
                 <select value={selectIndex6} onChange={handleChange6}>
@@ -961,6 +1088,26 @@ function DataReader(props) {
             </div>
             }
             {props.question === 7 && <div>
+                <div className={classes.inputs}>
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge tu usuario.</p>
+                        </div>
+
+                        <input />
+                    </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                        </div>
+
+                        <input />
+                    </section>
+                </div>
+
                 <h1>Pregunta 7</h1>
                 <p>Selecciona la persona base</p>
                 <select value={selectIndex7} onChange={handleChange7}>
@@ -1008,6 +1155,160 @@ function DataReader(props) {
 }
 
 const useStyles = makeStyles(theme => ({
+    main: {
+        width: '100%',
+        height: '100%',
+    },
+
+    inputs: {
+        boxSizing: 'border-box',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '25px',
+        paddingRight: '25px',
+        width: '100%',
+        height: '15%',
+        background: '#3E94F9',
+        borderRadius: '14px',
+        marginBottom: '40px',
+    },
+
+    input: {
+        marginRight: '35px',
+    },
+
+    instruction: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    mandalorian: {
+        width: '10px',
+        height: '10px',
+        background: '#FFDA15',
+        borderRadius: '6px',
+        marginRight: '8px',
+    },
+
+    inputText: {
+        margin: '0',
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        //fontWeight: '600',
+        fontSize: '18px',
+        lineHeight: '29px',
+
+        color: '#FFFFFF',
+
+    },
+
+    user: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxSizing: 'border-box',
+        width: '100%',
+        height: '20%',
+        background: '#FFFFFF',
+        borderRadius: '14px',
+        padding: '15px',
+    },
+
+    userInfo: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+
+    selectedName: {
+        margin: 0,
+        marginBottom: 15,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '25px',
+        lineHeight: '43px',
+
+        color: '#5C5C5C',
+    },
+
+    message: {
+        margin: 0,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        lineHeight: '34px',
+
+        color: '#727272',
+    },
+
+    recomendation: {
+        width: '100%',
+        height: '35%',
+        marginTop: 15,
+
+    },
+
+    rcommendedList: {
+        height: '100%',
+        margin: 0,
+        padding: 0,
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
+
+    listItem: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '20%',
+        height: '100%',
+        padding: 15,
+        marginRight: 15,
+        marginBottom: 15,
+        background: '#FFFFFF',
+        borderRadius: '14px',
+    },
+
+    namePersonRecom: {
+        margin: 0,
+        marginBottom: 15,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '25px',
+        lineHeight: '43px',
+
+        color: '#5C5C5C',
+    },
+
+    percentage: {
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        lineHeight: '34px',
+
+        color: '#3E94F9',
+    },
+
+    similarity: {
+        margin: 0,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        lineHeight: '34px',
+
+        color: '#727272',
+    },
 
 }));
 

@@ -21,17 +21,17 @@ function App() {
 
 const useStyles = makeStyles(theme => ({
 
-'@global': {
-    body: {
-      margin: 0,
-      height: '100%',
-      width: '100%',
-    },
-    '*': {
-      boxSizing: 'border-box',
-    },
+    '@global': {
+        body: {
+            margin: 0,
+            height: '100%',
+            width: '100%',
+        },
+        '*': {
+            boxSizing: 'border-box',
+        },
 
-}
+    }
 
 }));
 export default App;
