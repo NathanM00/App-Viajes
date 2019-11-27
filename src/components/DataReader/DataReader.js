@@ -228,6 +228,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -261,6 +262,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -324,6 +326,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     destino: newArray2[index].Destino,
                     valorK: valorFinalK + "%",
                     info: objetoD,
@@ -357,6 +360,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     destino: newArray2[index].Destino,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -390,6 +394,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -423,6 +428,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     destino: newArray2[index].Destino,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -486,6 +492,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -518,6 +525,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     destino: newArray2[index].Destino,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -550,6 +558,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     destino: newArray2[index].Destino,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -613,6 +622,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -645,6 +655,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
                     info: objetoB,
@@ -708,6 +719,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     destino: newArray2[index].Destino,
                     valorK: valorFinalK + "%",
                     info: objetoD,
@@ -764,6 +776,7 @@ function DataReader(props) {
 
             if (valorFinalK < 99) {
                 nuevosK.push({
+                    foto: newArray[index].foto,
                     cancion: newArray3[index].Canciones,
                     valorK: valorFinalK + "%",
                     info: objetoD,
@@ -806,7 +819,7 @@ function DataReader(props) {
 
                 <div className={classes.user}>
                     {selected && <div className={classes.userInfo}>
-                        <img src=""/>
+                        <img className={classes.selectedImage} src={selected.foto}/>
                         <section className={classes.text}>
                             <p className={classes.selectedName}>{selected.nombres}</p>
                             <p className={classes.message}>Tu y estas personas tienen gustos similares.</p>
@@ -818,6 +831,7 @@ function DataReader(props) {
                     <ul className={classes.rcommendedList}>
                         {listaOrdenados.map((item, i) =>
                             <div className={classes.listItem}>
+                                <img className={classes.imagePersonRecom} src={item.foto}/>
                                 <p className={classes.namePersonRecom}>{item.persona}</p>
                                 <p className={classes.similarity}><span className={classes.percentage}>{item.valorK}</span> de similitud</p>
                             </div>
@@ -1223,7 +1237,9 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
         alignItems: 'center',
     },
-
+    selectedImage:{
+        width:'10%',
+    },
     selectedName: {
         margin: 0,
         marginBottom: 15,
@@ -1276,7 +1292,9 @@ const useStyles = makeStyles(theme => ({
         background: '#FFFFFF',
         borderRadius: '14px',
     },
-
+    imagePersonRecom:{
+        width:'10%',
+    },
     namePersonRecom: {
         margin: 0,
         marginBottom: 15,
