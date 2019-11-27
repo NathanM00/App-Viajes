@@ -1161,6 +1161,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     inputs: {
+        //position: 'fixed',
+        //zIndex: 1,
         boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'row',
@@ -1169,6 +1171,7 @@ const useStyles = makeStyles(theme => ({
         paddingBottom: '15px',
         paddingLeft: '25px',
         paddingRight: '25px',
+        //width: '77.6%',
         width: '100%',
         height: '15%',
         background: '#3E94F9',
