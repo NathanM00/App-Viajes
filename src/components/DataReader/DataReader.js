@@ -7,6 +7,8 @@ function DataReader(props) {
 
     const classes = useStyles();
 
+    const classes = useStyles();
+
     const [rows, setRows] = React.useState([]);
     const [rows2, setRows2] = React.useState([]);
     const [rows3, setRows3] = React.useState([]);
