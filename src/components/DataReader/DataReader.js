@@ -3,68 +3,94 @@ import Papa from 'papaparse'
 import { ListItem, List, ListItemAvatar, ListItemText, Divider, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-function DataReader() {
+function DataReader(props) {
 
     const classes = useStyles();
 
     const [rows, setRows] = React.useState([]);
     const [rows2, setRows2] = React.useState([]);
+    const [rows3, setRows3] = React.useState([]);
 
     //lectura de base de datos de Gente
     React.useEffect(() => {
         async function getData() {
-            const response = await fetch('/resources/dataBaseViajes.csv')
-            const reader = response.body.getReader()
-            const result = await reader.read() // raw array
-            const decoder = new TextDecoder('utf-8')
-            const csv = decoder.decode(result.value) // the csv text
-            const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
-            const rows = results.data // array of objects
-            setRows(rows)
+            const response = await fetch('/resources/dataBaseViajes.csv');
+            const reader = response.body.getReader();
+            const result = await reader.read();
+            const decoder = new TextDecoder('utf-8');
+            const csv = decoder.decode(result.value);
+            const results = Papa.parse(csv, { header: true });
+            const rows = results.data;
+            setRows(rows);
         }
-        getData()
-    }, []) // [] means just do this once, after initial render
+        getData();
+    }, []);
 
     //lectura de base de datos de Destinos
     React.useEffect(() => {
         async function getData() {
-            const response = await fetch('/resources/dataBaseDestinos.csv')
-            const reader = response.body.getReader()
-            const result = await reader.read() // raw array
-            const decoder = new TextDecoder('utf-8')
-            const csv = decoder.decode(result.value) // the csv text
-            const results = Papa.parse(csv, { header: true }) // object with { data, errors, meta }
-            const rows = results.data // array of objects
-            setRows2(rows)
+            const response = await fetch('/resources/dataBaseDestinos.csv');
+            const reader = response.body.getReader();
+            const result = await reader.read();
+            const decoder = new TextDecoder('utf-8');
+            const csv = decoder.decode(result.value);
+            const results = Papa.parse(csv, { header: true });
+            const rows = results.data;
+            setRows2(rows);
         }
-        getData()
-    }, []) // [] means just do this once, after initial render
+        getData();
+    }, [])
+
+    //lectura de base de datos de hibrida
+    React.useEffect(() => {
+        async function getData() {
+            const response = await fetch('/resources/dataBaseMixed.csv');
+            const reader = response.body.getReader();
+            const result = await reader.read();
+            const decoder = new TextDecoder('utf-8');
+            const csv = decoder.decode(result.value);
+            const results = Papa.parse(csv, { header: true });
+            const rows = results.data;
+            setRows3(rows);
+        }
+        getData();
+    }, []);
 
     var newArray = Object.assign(rows);
     var newArray2 = Object.assign(rows2);
+    var newArray3 = Object.assign(rows3);
+
     let objetoA;
     let objetoB;
     var nuevosK = [];
 
     const [selectIndex, setSelectedIndex] = React.useState('');
+    const [selectIndex2, setSelectedIndex2] = React.useState('');
     const [selectIndex3, setSelectedIndex3] = React.useState('');
     const [selectIndex4, setSelectedIndex4] = React.useState('');
     const [selectIndex5, setSelectedIndex5] = React.useState('');
     const [selectIndex6, setSelectedIndex6] = React.useState('');
+    const [selectIndex7, setSelectedIndex7] = React.useState('');
 
     const [listaOrdenados, setListaOrdenados] = React.useState([]);
+    const [listaOrdenados2, setListaOrdenados2] = React.useState([]);
     const [listaOrdenados4, setListaOrdenados4] = React.useState([]);
     const [listaOrdenados5, setListaOrdenados5] = React.useState([]);
     const [listaOrdenados6, setListaOrdenados6] = React.useState([]);
+    const [listaOrdenados7, setListaOrdenados7] = React.useState([]);
 
     const [listaDestinos2, setListaDestinos2] = React.useState([]);
     const [listaDestinos3, setListaDestinos3] = React.useState([]);
     const [listaDestinos5, setListaDestinos5] = React.useState([]);
     const [listaDestinos6, setListaDestinos6] = React.useState([]);
     const [listaDestinos6b, setListaDestinos6b] = React.useState([]);
+    const [listaDestinos7, setListaDestinos7] = React.useState([]);
+
+    const [listaCanciones7, setListaCanciones7] = React.useState([]);
 
     const [indexLista, setIndexLista] = React.useState('0');
     const [indexLista2, setIndexLista2] = React.useState('0');
+    const [indexLista2b, setIndexLista2b] = React.useState('0');
     const [indexLista3, setIndexLista3] = React.useState('0');
     const [indexLista4, setIndexLista4] = React.useState('0');
     const [indexLista5, setIndexLista5] = React.useState('0');
@@ -72,9 +98,15 @@ function DataReader() {
     const [indexLista6, setIndexLista6] = React.useState('0');
     const [indexLista6b, setIndexLista6b] = React.useState('0');
     const [indexLista6c, setIndexLista6c] = React.useState('0');
+    const [indexLista7, setIndexLista7] = React.useState('0');
+    const [indexLista7b, setIndexLista7b] = React.useState('0');
+    const [indexLista7c, setIndexLista7c] = React.useState('0');
 
     let selected = null;
     if (selectIndex !== '') selected = newArray[selectIndex];
+
+    let selected2 = null;
+    if (selectIndex2 !== '') selected2 = newArray[selectIndex2];
 
     let selected3 = null;
     if (selectIndex3 !== '') selected3 = newArray[selectIndex3];
@@ -88,9 +120,16 @@ function DataReader() {
     let selected6 = null;
     if (selectIndex6 !== '') selected6 = newArray[selectIndex6];
 
+    let selected7 = null;
+    if (selectIndex7 !== '') selected7 = newArray[selectIndex7];
+
     //Funciones donde dan los cambios de valor en los inputss
     function handleChange(event) {
         setSelectedIndex(event.target.value);
+    }
+
+    function handleChange2(event) {
+        setSelectedIndex2(event.target.value);
     }
 
     function handleChange3(event) {
@@ -110,9 +149,17 @@ function DataReader() {
         setIndexLista6(1);
     }
 
+    function handleChange7(event) {
+        setSelectedIndex7(event.target.value);
+    }
+
     //Los que estan relacionados a personas
     function handleAcompañantes(event) {
         setIndexLista(event.target.value);
+    }
+
+    function handleAcompañantes2(event) {
+        setIndexLista2(event.target.value);
     }
 
     function handleAcompañantes4(event) {
@@ -127,9 +174,13 @@ function DataReader() {
         setIndexLista6c(event.target.value);
     }
 
+    function handleAcompañantes7(event) {
+        setIndexLista7(event.target.value);
+    }
+
     //Los que estan relacionados a lugares
     function handleLugares2(event) {
-        setIndexLista2(event.target.value);
+        setIndexLista2b(event.target.value);
     }
 
     function handleLugares3(event) {
@@ -142,7 +193,15 @@ function DataReader() {
 
     function handleLugares6(event) {
         setIndexLista6b(event.target.value);
+    }
 
+    function handleLugares7(event) {
+        setIndexLista7b(event.target.value);
+    }
+
+    //los que estan relacionados a las canciones
+    function handleCanciones7(event) {
+        setIndexLista7c(event.target.value);
     }
 
     //Funciones donde se hacen las listas y todo el asunto
@@ -180,13 +239,46 @@ function DataReader() {
     }
 
     function formulaCos2() {
-        objetoA = Object.values(selected).slice(1);
+        objetoA = Object.values(selected2).slice(1);
+
+        for (let index = 0; index < newArray.length; index++) {
+            objetoB = Object.values(newArray[index]).slice(1);
+
+            var numerador = 0;
+            var denominadorA = 0;
+            var denominadorB = 0;
+
+            for (let index = 1; index < objetoA.length; index++) {
+                numerador += (parseInt(objetoA[index]) * parseInt(objetoB[index]));
+                denominadorA += (parseInt(objetoA[index]) * parseInt(objetoA[index]));
+                denominadorB += (parseInt(objetoB[index]) * parseInt(objetoB[index]));
+            }
+
+            denominadorA = Math.sqrt(denominadorA);
+            denominadorB = Math.sqrt(denominadorB);
+            var valorK = numerador / (denominadorA * denominadorB);
+            var valorFinalK = parseInt(valorK * 100);
+
+            if (valorFinalK < 99) {
+                nuevosK.push({
+                    persona: newArray[index].nombres,
+                    valorK: valorFinalK + "%",
+                    info: objetoB,
+                });
+            }
+
+        }
+        setListaOrdenados2(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista2));
+    }
+
+    function formulaCos2b() {
+        objetoA = Object.values(selected2).slice(1);
 
         var yoMismo = {
             info: objetoA,
         }
 
-        let temp = listaOrdenados;
+        let temp = listaOrdenados2;
         temp.push(yoMismo);
 
         var promedio = [];
@@ -209,7 +301,7 @@ function DataReader() {
         let perfilGrupal = null;
         perfilGrupal = promedio;
 
-        let objetoC = Object.values(perfilGrupal).slice(1);
+        let objetoC = Object.values(perfilGrupal).slice(2);
         let objetoD;
 
         for (let index = 0; index < newArray2.length; index++) {
@@ -236,10 +328,9 @@ function DataReader() {
                     valorK: valorFinalK + "%",
                     info: objetoD,
                 });
-                console.log(nuevosK.destino);
             }
         }
-        setListaDestinos2(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista2));
+        setListaDestinos2(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista2b));
 
     }
 
@@ -531,9 +622,160 @@ function DataReader() {
         setListaOrdenados6(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista6c));
     }
 
+    function formulaCos7() {
+        objetoA = Object.values(selected7).slice(1);
+
+        for (let index = 0; index < newArray.length; index++) {
+            objetoB = Object.values(newArray[index]).slice(1);
+
+            var numerador = 0;
+            var denominadorA = 0;
+            var denominadorB = 0;
+
+            for (let index = 1; index < objetoA.length; index++) {
+                numerador += (parseInt(objetoA[index]) * parseInt(objetoB[index]));
+                denominadorA += (parseInt(objetoA[index]) * parseInt(objetoA[index]));
+                denominadorB += (parseInt(objetoB[index]) * parseInt(objetoB[index]));
+            }
+
+            denominadorA = Math.sqrt(denominadorA);
+            denominadorB = Math.sqrt(denominadorB);
+            var valorK = numerador / (denominadorA * denominadorB);
+            var valorFinalK = parseInt(valorK * 100);
+
+            if (valorFinalK < 99) {
+                nuevosK.push({
+                    persona: newArray[index].nombres,
+                    valorK: valorFinalK + "%",
+                    info: objetoB,
+                });
+            }
+
+        }
+        setListaOrdenados7(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista7));
+    }
+
+    function formulaCos7b() {
+        objetoA = Object.values(selected7).slice(1);
+
+        var yoMismo = {
+            info: objetoA,
+        }
+
+        let temp = listaOrdenados7;
+        temp.push(yoMismo);
+
+        var promedio = [];
+        promedio[37] = 0;
+        var ordenado;
+
+        for (let index = 0; index < promedio.length; index++) {
+            promedio[index] = 0;
+        }
+        for (let index = 0; index < temp.length; index++) {
+            ordenado = temp[index].info;
+            for (let y = 1; y < ordenado.length; y++) {
+                promedio[y] += parseInt(ordenado[y]);
+            }
+        }
+        for (let index = 0; index < promedio.length; index++) {
+            promedio[index] = parseInt(promedio[index] / temp.length);
+        }
+        // Este promedio es el perfil grupal de las personas que salen en la primer pregunta sin contarte a ti mismo xd
+        let perfilGrupal = null;
+        perfilGrupal = promedio;
+
+        let objetoC = Object.values(perfilGrupal).slice(1);
+        let objetoD;
+
+        for (let index = 0; index < newArray2.length; index++) {
+            objetoD = Object.values(newArray2[index]).slice(2);
+
+            var numerador = 0;
+            var denominadorA = 0;
+            var denominadorB = 0;
+
+            for (let index = 1; index < objetoC.length; index++) {
+                numerador += (parseInt(objetoC[index]) * parseInt(objetoD[index]));
+                denominadorA += (parseInt(objetoC[index]) * parseInt(objetoC[index]));
+                denominadorB += (parseInt(objetoD[index]) * parseInt(objetoD[index]));
+            }
+
+            denominadorA = Math.sqrt(denominadorA);
+            denominadorB = Math.sqrt(denominadorB);
+            var valorK = numerador / (denominadorA * denominadorB);
+            var valorFinalK = parseInt(valorK * 100);
+
+            if (valorFinalK < 99) {
+                nuevosK.push({
+                    destino: newArray2[index].Destino,
+                    valorK: valorFinalK + "%",
+                    info: objetoD,
+                });
+            }
+        }
+        setListaDestinos7(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista7b));
+    }
+
+    function formulaCos7c() {
+
+        let temp = listaDestinos7;
+
+        var promedio = [];
+        promedio[37] = 0;
+        var ordenado;
+
+        for (let index = 0; index < promedio.length; index++) {
+            promedio[index] = 0;
+        }
+        for (let index = 0; index < temp.length; index++) {
+            ordenado = temp[index].info;
+            for (let y = 1; y < ordenado.length; y++) {
+                promedio[y] += parseInt(ordenado[y]);
+            }
+        }
+        for (let index = 0; index < promedio.length; index++) {
+            promedio[index] = parseInt(promedio[index] / temp.length);
+        }
+        // Este promedio es el perfil grupal de las personas que salen en la primer pregunta sin contarte a ti mismo xd
+        let perfilGrupal = null;
+        perfilGrupal = promedio;
+
+        let objetoC = Object.values(perfilGrupal).slice(1);
+        let objetoD;
+
+        for (let index = 0; index < newArray2.length; index++) {
+            objetoD = Object.values(newArray2[index]).slice(2);
+
+            var numerador = 0;
+            var denominadorA = 0;
+            var denominadorB = 0;
+
+            for (let index = 1; index < objetoC.length; index++) {
+                numerador += (parseInt(objetoC[index]) * parseInt(objetoD[index]));
+                denominadorA += (parseInt(objetoC[index]) * parseInt(objetoC[index]));
+                denominadorB += (parseInt(objetoD[index]) * parseInt(objetoD[index]));
+            }
+
+            denominadorA = Math.sqrt(denominadorA);
+            denominadorB = Math.sqrt(denominadorB);
+            var valorK = numerador / (denominadorA * denominadorB);
+            var valorFinalK = parseInt(valorK * 100);
+
+            if (valorFinalK < 99) {
+                nuevosK.push({
+                    cancion: newArray3[index].Canciones,
+                    valorK: valorFinalK + "%",
+                    info: objetoD,
+                });
+            }
+        }
+        setListaCanciones7(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista7c));
+    }
+
     return (
         <section >
-            <div>
+            {props.question === 1 && <div>
                 <h1>Pregunta 1</h1>
                 <p>Selecciona la persona base</p>
                 <select value={selectIndex} onChange={handleChange}>
@@ -557,12 +799,33 @@ function DataReader() {
                     )}
                 </ul>
             </div>
-
-            <div>
+            }
+            {props.question === 2 && <div>
                 <h1>Pregunta 2</h1>
+                <p>Selecciona la persona base</p>
+                <select value={selectIndex2} onChange={handleChange2}>
+                    <option value="">-</option>
+
+                    {newArray.map((item, i) =>
+                        <option value={i} key={i}>{item.nombres}</option>
+                    )}
+                </select>
+                {selectIndex2 && <div>
+                    {selected2.nombres}
+
+                </div>}
+                <p>Selecciona el numero de acompañantes</p>
+                <input onChange={handleAcompañantes2} type='number' placeholder='Numero de acompañantes' />
+                <button onClick={formulaCos2}>Start</button>
+                <p>Acompañantes recomendados</p>
+                <ul>
+                    {listaOrdenados2.map((item, i) =>
+                        <li>{item.persona}{item.valorK}</li>
+                    )}
+                </ul>
                 <p>Segun el grupo de personas anterior, selecciona el numero de lugares</p>
                 <input onChange={handleLugares2} type='number' placeholder='Numero de lugares recomendados' />
-                <button onClick={formulaCos2}>Start</button>
+                <button onClick={formulaCos2b}>Start</button>
                 <p>Destinos recomendados</p>
                 <ul>
                     {listaDestinos2.map((item, i) =>
@@ -570,8 +833,8 @@ function DataReader() {
                     )}
                 </ul>
             </div>
-
-            <div>
+            }
+            {props.question === 3 && <div>
                 <h1>Pregunta 3</h1>
                 <p>Selecciona la persona base</p>
                 <select value={selectIndex3} onChange={handleChange3}>
@@ -595,8 +858,8 @@ function DataReader() {
                     )}
                 </ul>
             </div>
-
-            <div>
+            }
+            {props.question === 4 && <div>
                 <h1>Pregunta 4</h1>
                 <p>Selecciona el destino base</p>
                 <select value={selectIndex4} onChange={handleChange4}>
@@ -621,8 +884,8 @@ function DataReader() {
                     )}
                 </ul>
             </div>
-
-            <div>
+            }
+            {props.question === 5 && <div>
                 <h1>Pregunta 5</h1>
                 <p>Selecciona el destino base</p>
                 <select value={selectIndex5} onChange={handleChange5}>
@@ -655,7 +918,8 @@ function DataReader() {
                     )}
                 </ul>
             </div>
-            <div>
+            }
+            {props.question === 6 && <div>
                 <h1>Pregunta 6</h1>
                 <p>Selecciona la persona base</p>
                 <select value={selectIndex6} onChange={handleChange6}>
@@ -695,6 +959,50 @@ function DataReader() {
                     )}
                 </ul>
             </div>
+            }
+            {props.question === 7 && <div>
+                <h1>Pregunta 7</h1>
+                <p>Selecciona la persona base</p>
+                <select value={selectIndex7} onChange={handleChange7}>
+                    <option value="">-</option>
+
+                    {newArray.map((item, i) =>
+                        <option value={i} key={i}>{item.nombres}</option>
+                    )}
+                </select>
+                {selected7 && <div>
+                    {selected7.nombres}
+
+                </div>}
+                <p>Selecciona el numero de acompañantes</p>
+                <input onChange={handleAcompañantes7} type='number' placeholder='Numero de acompañantes' />
+                <button onClick={formulaCos7}>Start</button>
+                <p>Acompañantes recomendados</p>
+                <ul>
+                    {listaOrdenados7.map((item, i) =>
+                        <li>{item.persona}{item.valorK}</li>
+                    )}
+                </ul>
+                <p>Segun el grupo de personas anterior, selecciona el numero de lugares</p>
+                <input onChange={handleLugares7} type='number' placeholder='Numero de lugares recomendados' />
+                <button onClick={formulaCos7b}>Start</button>
+                <p>Destinos recomendados</p>
+                <ul>
+                    {listaDestinos7.map((item, i) =>
+                        <li>{item.destino}{item.valorK}</li>
+                    )}
+                </ul>
+                <p>Selecciona el numero de canciones</p>
+                <input onChange={handleCanciones7} type='number' placeholder='Numero de canciones' />
+                <button onClick={formulaCos7c}>Start</button>
+                <p>Canciones recomendadas</p>
+                <ul>
+                    {listaCanciones7.map((item, i) =>
+                        <li>{item.cancion} {item.valorK}</li>
+                    )}
+                </ul>
+            </div>
+            }
         </section>
     );
 }

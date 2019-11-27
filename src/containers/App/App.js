@@ -6,6 +6,13 @@ function App() {
 
   const classes = useStyles();
 
+  const [question, setQuestion] = React.useState(1);
+
+  function handleQuestion(event){
+    let currentQuestion = parseInt(event.target.value);
+    setQuestion(currentQuestion);
+  }
+
   return (
     <div >
         <div className={classes.app}>
@@ -13,13 +20,13 @@ function App() {
                 <img className={classes.logo} src="/images/logo2.png"></img>
 
                 <section className={classes.btnConatiner}>
-                    <button className={classes.navButtons}>Personas similares</button>
-                    <button className={classes.navButtons}>Viaje grupal</button>
-                    <button className={classes.navButtons}>Destinos para ti</button>
-                    <button className={classes.navButtons}>Destinos para ti y amigos</button>
-                    <button className={classes.navButtons}>Destinos para amigos</button>
-                    <button className={classes.navButtons}>Tus destinos para los demás</button>
-                    <button className={classes.navButtons}>Música para tus viajes</button>
+                    <button className={classes.navButtons} value={1} onClick={handleQuestion}>Personas similares</button>
+                    <button className={classes.navButtons} value={2} onClick={handleQuestion}>Viaje grupal</button>
+                    <button className={classes.navButtons} value={3} onClick={handleQuestion}>Destinos para ti</button>
+                    <button className={classes.navButtons} value={4} onClick={handleQuestion}>Destinos para ti y amigos</button>
+                    <button className={classes.navButtons} value={5} onClick={handleQuestion}>Destinos para amigos</button>
+                    <button className={classes.navButtons} value={6} onClick={handleQuestion}>Tus destinos para los demás</button>
+                    <button className={classes.navButtons} value={7} onClick={handleQuestion}>Música para tus viajes</button>
                 </section>
 
             </section>
@@ -45,7 +52,8 @@ function App() {
                         <input />
                     </section>
                 </div>
-                <DataReader className={classes.infoVisualization}></DataReader>
+               
+                <DataReader question={question} className={classes.infoVisualization}></DataReader>
 
             </section>
         </div>
