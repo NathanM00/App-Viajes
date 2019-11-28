@@ -1,13 +1,31 @@
 import React from 'react';
+import Papa from 'papaparse'
 import DataReader from '../../components/DataReader/DataReader';
 import { makeStyles } from '@material-ui/styles';
 import { Link } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 import { fb } from '../../utils/firebase';
 
-function TripCreator({user}) {
+function TripCreator({ user }) {
     const classes = useStyles();
     const [question, setQuestion] = React.useState(1);
+    const [rows, setRows] = React.useState([]);
+    var profilePicture;
+    //lectura de base de datos de Gente
+    React.useEffect(() => {
+        async function getData() {
+            const response = await fetch('/resources/dataBaseViajes.csv');
+            const reader = response.body.getReader();
+            const result = await reader.read();
+            const decoder = new TextDecoder('utf-8');
+            const csv = decoder.decode(result.value);
+            const results = Papa.parse(csv, { header: true });
+            const rows = results.data;
+            setRows(rows);
+        }
+        getData();
+    }, []);
+    var newArray = Object.assign(rows);
 
     function handleQuestion(event) {
         let currentQuestion = parseInt(event.target.value);
@@ -16,18 +34,27 @@ function TripCreator({user}) {
 
     const handleLogout = () => {
         fb.auth().signOut();
-        
-      }
+    }
 
-    if(!user){
+    if (!user) {
         return <Redirect to="/login" />;
-      }
+    }
+
+    if (user) {
+        for (let index = 0; index < newArray.length; index++) {
+            if (newArray[index].nombres === user.fullname) {
+                profilePicture = newArray[index].foto
+            } else {
+                profilePicture = '/images/anonimo.png'
+            }
+        }
+    }
 
     return (
         <div className={classes.main}>
             <div className={classes.app}>
                 <section className={classes.nav}>
-                        <img className={classes.logo} src="/images/logo3.png"></img>
+                    <img className={classes.logo} src="/images/logo3.png"></img>
 
                     <section className={classes.btnConatiner}>
                         <button className={classes.navButtons} value={1} onClick={handleQuestion}>Personas similares</button>
@@ -37,7 +64,17 @@ function TripCreator({user}) {
                         <button className={classes.navButtons} value={5} onClick={handleQuestion}>Destinos para amigos</button>
                         <button className={classes.navButtons} value={6} onClick={handleQuestion}>Tus destinos para los demás</button>
                         <button className={classes.navButtons} value={7} onClick={handleQuestion}>Música para tus viajes</button>
+                        <Link className={classes.navPlans} to="plans">Mis planes</Link>
                     </section>
+
+                    <section className={classes.profile}>
+                        <img src={profilePicture} className={classes.profilePic} />
+                        <section className={classes.profileTexts}>
+                            <p className={classes.profileName}>{user.fullname}</p>
+                            <p className={classes.profileCountry}>Colombia</p>
+                        </section>
+                    </section>
+
                     {user && <p className={classes.logout} onClick={handleLogout}>Cerrar sesión</p>}
 
                 </section>
@@ -53,14 +90,37 @@ function TripCreator({user}) {
 }
 
 const useStyles = makeStyles(theme => ({
+    profile: {
+        background: "white",
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        borderTopLeftRadius: '10px',
+        borderBottomLeftRadius: '10px',
+    },
+    profileCountry: {
+        color: '#717171',
+        fontSize: '1em',
+    },
+    profileTexts: {
+        width: '50%',
+    },
+    profileName: {
+        color: '#282828',
+        fontSize: '1.3em',
+        fontWeight: 'bold',
+    },
+    profilePic: {
+        width: '30%',
+    },
     main: {
         width: '100%',
         height: '100%',
-
     },
     logout: {
         color: 'rgba(255, 255, 255, 0.8)',
-        marginRight:'160px',
+        marginRight: '160px',
     },
     app: {
         display: 'flex',
@@ -92,7 +152,7 @@ const useStyles = makeStyles(theme => ({
         display: ' flex',
         flexDirection: 'column',
         width: '100%',
-        height: '100%',
+        height: '70%',
         paddingLeft: '6px',
     },
 
@@ -102,7 +162,8 @@ const useStyles = makeStyles(theme => ({
         height: '7%',
         background: 'none',
         paddingLeft: '6%',
-
+        borderTopLeftRadius: '10px',
+        borderBottomLeftRadius: '10px',
         color: 'white',
         border: 'none',
         fontFamily: 'Lato',
@@ -110,10 +171,37 @@ const useStyles = makeStyles(theme => ({
         //fontWeight: '600',
         fontSize: '18px',
         lineHeight: '29px',
+        marginTop: '10px',
 
         '&:hover': {
             background: "#FFDA15",
             color: '#3E94F9',
+            fontWeight: '600',
+        },
+    },
+
+    navPlans: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        height: '7%',
+        background: 'white',
+        paddingLeft: '6%',
+        textDecoration: 'none',
+        paddingTop: '3px',
+        color: '#282828',
+        border: 'none',
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        //fontWeight: '600',
+        fontSize: '18px',
+        lineHeight: '29px',
+        marginTop: '80px',
+        borderTopLeftRadius: '10px',
+        borderBottomLeftRadius: '10px',
+        '&:hover': {
+            background: "#3E94F9",
+            color: 'white',
+            border: '1px solid white',
             fontWeight: '600',
         },
     },
