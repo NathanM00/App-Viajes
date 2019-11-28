@@ -13,7 +13,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   width: 100%;
-  background: #EDF0F5,
+  background: #edf0f5;
+  position: absolute;
 }
 #root{
   height: 100%;

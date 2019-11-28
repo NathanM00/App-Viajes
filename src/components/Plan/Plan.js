@@ -20,11 +20,11 @@ function Plan(props) {
     //console.log(props.fotoAcomp);
     //onsole.log(props.fotoCancion);
 
-    if (fotoLugar === undefined) {
+    if (fotoLugar == undefined) {
         fotoLugar = '/images/pointer.png';
-    } else if (fotoAcomp === undefined) {
+    } else if (fotoAcomp == undefined) {
         fotoAcomp = '/images/anonimo.png';
-    } else if (fotoCancion === undefined) {
+    } else if (fotoCancion == undefined) {
         fotoCancion = '/images/cd.png';
     }
 
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         //justifyContent: 'center',
-        width: '30%',
+        minWidth: '30%',
         height: '100%',
         marginRight: 15,
         marginBottom: 15,

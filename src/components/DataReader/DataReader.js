@@ -511,8 +511,8 @@ function DataReader(props) {
                 });
             }
         }
+        listaDestinos5.pop();
         setListaOrdenados5(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista5b));
-        console.log(listaOrdenados5);
     }
 
     function formulaCos6() {
@@ -580,16 +580,18 @@ function DataReader(props) {
 
         }
         setListaDestinos6b(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista6b));
+
     }
 
     function formulaCos6c() {
-        objetoA = Object.values(listaDestinos6[0].info).slice(1);
+        let temp = listaDestinos6b;
+        console.log(listaDestinos6b);
+        let objetoX = Object.values(listaDestinos6[0].info).slice(1);
 
         var yoMismo = {
-            info: objetoA,
+            info: objetoX,
         }
 
-        let temp = listaDestinos6b;
         temp.push(yoMismo);
 
         var promedio = [];
@@ -642,6 +644,7 @@ function DataReader(props) {
                 });
             }
         }
+        listaDestinos6b.pop();
         setListaOrdenados6(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista6c));
     }
 
@@ -1491,7 +1494,9 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '26.5px',
         border: 'none',
         marginTop: 25,
-
+        position: 'fixed',
+        bottom: '25px',
+        right: '25px',
         fontFamily: 'Lato',
         fontStyle: 'normal',
         fontWeight: 'bold',
@@ -1674,125 +1679,125 @@ const useStyles = makeStyles(theme => ({
     },
 
     rcommendedListPlace: {
-    height: '100%',
-    margin: 0,
-    padding: 0,
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-},
+        height: '100%',
+        margin: 0,
+        padding: 0,
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
 
     //--------------Pregunta3------------------------
 
     main3: {
-    width: '100%',
-    height: '100%',
-},
+        width: '100%',
+        height: '100%',
+    },
 
     //--------------Pregunta4------------------------
 
     main4: {
-    width: '100%',
-    height: '100%',
-},
+        width: '100%',
+        height: '100%',
+    },
 
     //--------------Pregunta5------------------------
 
     main5: {
-    width: '100%',
-    height: '100%',
-},
+        width: '100%',
+        height: '100%',
+    },
 
     //--------------Pregunta6------------------------
 
     main6: {
-    width: '100%',
-    height: '100%',
-},
+        width: '100%',
+        height: '100%',
+    },
 
     //--------------Pregunta7------------------------
 
     main7: {
-    width: '100%',
-    height: '100%',
-},
+        width: '100%',
+        height: '100%',
+    },
 
     input7: {
-    marginRight: 30,
-},
+        marginRight: 30,
+    },
 
     inputUser7: {
-    height: 40,
-    width: 200,
-    background: '#FFFFFF',
-    borderRadius: '26.5px',
-    padding: 10,
-    border: 'none',
-    outline: 0,
+        height: 40,
+        width: 200,
+        background: '#FFFFFF',
+        borderRadius: '26.5px',
+        padding: 10,
+        border: 'none',
+        outline: 0,
 
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    fontSize: '15px',
-    lineHeight: '29px',
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontSize: '15px',
+        lineHeight: '29px',
 
-    color: '#727272',
-},
+        color: '#727272',
+    },
 
     inputNumber7: {
-    height: 40,
-    width: 200,
-    background: '#FFFFFF',
-    borderRadius: '26.5px',
-    border: 'none',
-    padding: 15,
+        height: 40,
+        width: 200,
+        background: '#FFFFFF',
+        borderRadius: '26.5px',
+        border: 'none',
+        padding: 15,
 
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    fontSize: '15px',
-    lineHeight: '29px',
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontSize: '15px',
+        lineHeight: '29px',
 
-    color: '#727272',
+        color: '#727272',
 
-},
+    },
 
     rcommendedMusic: {
-    height: '100%',
-    margin: 0,
-    padding: 0,
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-},
+        height: '100%',
+        margin: 0,
+        padding: 0,
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
 
     txtRcommend: {
-    margin: 0,
-    marginTop: 20,
-    marginBottom: 10,
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '20px',
-    lineHeight: '34px',
+        margin: 0,
+        marginTop: 20,
+        marginBottom: 10,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        lineHeight: '34px',
 
-    color: '#727272',
-},
+        color: '#727272',
+    },
 
     startBtn7: {
-    height: 40,
-    width: 60,
-    background: '#FFDA15',
-    borderRadius: '26.5px',
-    border: 'none',
-    marginLeft: 15,
+        height: 40,
+        width: 60,
+        background: '#FFDA15',
+        borderRadius: '26.5px',
+        border: 'none',
+        marginLeft: 15,
 
-    fontFamily: 'Lato',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
-    fontSize: '15px',
-    lineHeight: '29px',
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '15px',
+        lineHeight: '29px',
 
-    color: '#3E94F9',
-},
+        color: '#3E94F9',
+    },
 
 }));
 

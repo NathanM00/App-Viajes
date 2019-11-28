@@ -31,7 +31,15 @@ const useStyles = makeStyles(theme => ({
         background: '#FFFFFF',
         borderRadius: '14px',
     },
+    percentage: {
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        lineHeight: '34px',
 
+        color: '#3E94F9',
+    },
     imagePlaceRecom: {
         width: '100%',
         height: '55%',

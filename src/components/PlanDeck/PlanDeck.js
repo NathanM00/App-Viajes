@@ -84,33 +84,40 @@ function DataReader(props) {
                     <div className={classes.container}>
                         <div className={classes.columns}>
                             <h3 className={classes.subtitle}>Acompañantes</h3>
-                            {data.partners !== undefined && data.partners.map((item, i) =>
-                                <div className={classes.item}>
-                                    <img className={classes.itemPic} src={item.foto} />
-                                    <p className={classes.itemName}>{item.persona}</p>
-                                    <p className={classes.itemK}>{item.valorK}</p>
-                                </div>
-                            )}
+                            <div className={classes.itemContainer}>
+                                {data.partners !== undefined && data.partners.map((item, i) =>
+                                    <div className={classes.item}>
+                                        <img className={classes.itemPic} src={item.foto} />
+                                        <p className={classes.itemName}>{item.persona}</p>
+                                        <p className={classes.itemK}>{item.valorK}</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className={classes.columns}>
                             <h3 className={classes.subtitle}>Destinos</h3>
-                            {data.places !== undefined && data.places.map((item, i) =>
-                                <div className={classes.item}>
-                                    <img className={classes.itemPic} src={item.foto} />
-                                    <p className={classes.itemName}>{item.destino}</p>
-                                    <p className={classes.itemK}>{item.valorK}</p>
-                                </div>
-                            )}
+                            <div className={classes.itemContainer}>
+                                {data.places !== undefined && data.places.map((item, i) =>
+                                    <div className={classes.item}>
+                                        <img className={classes.itemPic} src={item.foto} />
+                                        <p className={classes.itemName}>{item.destino}</p>
+                                        <p className={classes.itemK}>{item.valorK}</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <div className={classes.columns}>
                             <h3 className={classes.subtitle}>Playlist</h3>
-                            {data.songs !== undefined && data.songs.map((item, i) =>
-                                <div className={classes.item}>
-                                    <img className={classes.itemPic} src={item.foto} />
-                                    <p className={classes.itemName}>{item.cancion}</p>
-                                    <p className={classes.itemK}>{item.valorK}</p>
-                                </div>
-                            )}
+                            <div className={classes.itemContainer}>
+                                {data.songs !== undefined && data.songs.map((item, i) =>
+                                    <div className={classes.item}>
+                                        <img className={classes.itemPic} src={item.foto} />
+                                        <p className={classes.itemName}>{item.cancion}</p>
+                                        <p className={classes.itemK}>{item.valorK}</p>
+                                    </div>
+                                )}
+                            </div>
+
                         </div>
                     </div>
 
@@ -128,17 +135,26 @@ const useStyles = makeStyles(theme => ({
     title: {
         color: '#282828',
         fontSize: '1.9em',
-        paddingLeft:'30px',
+        paddingLeft: '30px',
     },
     subtitle: {
-        color:'#5C5C5C',
-        color:'#3E94F9',
+        color: '#5C5C5C',
+        color: '#3E94F9',
         fontSize: '1.5em',
         marginTop: 0,
     },
+    itemContainer: {
+        width: '100%',
+        height: '80%',
+        display: 'flex',
+        overflowY: 'auto',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'space-evenly',
+    },
     item: {
         width: '100%',
-        height: '20%',
+        minHeight: '30%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
@@ -149,22 +165,22 @@ const useStyles = makeStyles(theme => ({
     },
     itemK: {
         fontSize: '1em',
-        color:'#3E94F9',
+        color: '#3E94F9',
         width: '10%',
     },
     itemName: {
         fontSize: '1.3em',
-        color:'#5C5C5C',
+        color: '#5C5C5C',
         width: '60%',
     },
-    container:{
+    container: {
         width: '100%',
         height: '90%',
         flexDirection: 'row',
         display: 'flex',
-        justifyContent:'space-evenly',
+        justifyContent: 'space-evenly',
     },
-    columns:{
+    columns: {
         width: '30%',
         height: '100%',
     },
@@ -188,7 +204,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'row',
         height: '30%',
-        scrollBehavior: 'scroll'
+        overflowX: 'auto',
     },
 }));
 

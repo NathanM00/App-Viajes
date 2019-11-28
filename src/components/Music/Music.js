@@ -2,9 +2,28 @@ import React from 'react'
 import Papa from 'papaparse'
 import { ListItem, List, ListItemAvatar, ListItemText, Divider, Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { Howl, Howler } from 'howler';
+import { textAlign } from '@material-ui/system';
 
 function Music(props) {
     const classes = useStyles();
+    var sound = new Howl({
+        src: ["/audios/" + props.cancion + ".mp3"]
+    });
+
+    var isPlaying = true;
+
+    function handlePlay() {
+        isPlaying = !isPlaying;
+        console.log(isPlaying)
+        if (!isPlaying) {
+            sound.play();
+            console.log('play')
+        } else {
+            sound.pause();
+            console.log('pausa')
+        }
+    }
 
     return (
         <div className={classes.listItemMusic}>
@@ -12,11 +31,11 @@ function Music(props) {
             <section className={classes.songInfo}>
                 <p className={classes.songRecom}>{props.cancion}</p>
                 <p className={classes.similarity}><span className={classes.songSimilarity}>{props.valork}</span> de similaridad</p>
-                <p className={classes.spotify}>Escucha en Spotify!</p>
+                <div className={classes.play} onClick={handlePlay}>play</div>
+                <p className={classes.spotify} onClick={handlePlay}>Escucha en Spotify!</p>
             </section>
         </div>
     );
-
 }
 
 const useStyles = makeStyles(theme => ({
@@ -25,7 +44,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '35%',
+        width: '30%',
         height: '30%',
         marginRight: 15,
         marginBottom: 15,
@@ -34,7 +53,13 @@ const useStyles = makeStyles(theme => ({
         borderRadius: '14px',
         padding: 15,
     },
-
+    play: {
+        background: '#1ED760',
+        width: '30%',
+        height: '30%',
+        textAlign:' center',
+        borderRadius: '10px',
+    },
     songImg: {
         width: '60%',
         marginRight: 20,
