@@ -1,16 +1,27 @@
 import React from 'react';
 import DataReader from '../../components/DataReader/DataReader';
 import { makeStyles } from '@material-ui/styles';
+import { Link } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
+import { fb } from '../../utils/firebase';
 
-function TripCreator() {
+function TripCreator({user}) {
     const classes = useStyles();
-
     const [question, setQuestion] = React.useState(1);
 
     function handleQuestion(event) {
         let currentQuestion = parseInt(event.target.value);
         setQuestion(currentQuestion);
     }
+
+    const handleLogout = () => {
+        fb.auth().signOut();
+        
+      }
+
+    if(!user){
+        return <Redirect to="/login" />;
+      }
 
     return (
         <div className={classes.main}>
@@ -27,6 +38,7 @@ function TripCreator() {
                         <button className={classes.navButtons} value={6} onClick={handleQuestion}>Tus destinos para los demás</button>
                         <button className={classes.navButtons} value={7} onClick={handleQuestion}>Música para tus viajes</button>
                     </section>
+                    {user && <p className={classes.logout} onClick={handleLogout}>Cerrar sesión</p>}
 
                 </section>
 
@@ -46,7 +58,10 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
 
     },
-
+    logout: {
+        color: 'rgba(255, 255, 255, 0.8)',
+        marginRight:'160px',
+    },
     app: {
         display: 'flex',
         flexDirection: 'row',
@@ -68,11 +83,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     logo: {
-        width: 'auto',
-        hieght: 'auto',
-        marginTop: 26,
-        marginBottom: '80px',
-
+        width: '70%',
+        marginBottom: '60px',
     },
 
     btnConatiner: {

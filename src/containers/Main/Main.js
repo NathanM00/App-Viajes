@@ -1,36 +1,52 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Link } from "react-router-dom";
+import { fb } from '../../utils/firebase';
+import { Redirect } from 'react-router-dom';
 
-function Main(props) {
+function Main({ user }) {
 
     const classes = useStyles();
 
-    return (
-        <div className={classes.app}>
+    const handleLogout = () => {
+        fb.auth().signOut();
+    }
 
-            <div className={classes.nav}>
-                <img className={classes.logo} src="/images/logo3.png"></img>
-                <div className={classes.logreg}>
-                    <p>Login</p>
-                    <p>Register</p>
-                </div>
-            </div>
+    if (user){
+            return(
+                 <Redirect to="/tripcreator" />
+            )
+    }
 
-            <div className={classes.container}>
+        return (
+            <div className={classes.app}>
 
-                <div className={classes.info}>
-                    <p className={classes.legend}>Conoce los destinos turísticos que mas vayan contigo, las personas que mas enriquezcan tu viaje y las mejor playlist para el camino, todo en <span className={classes.span}>un solo lugar</span>.</p>
-
-                    <div className={classes.promo}>
-                        <img className={classes.logo} src="/images/logo3.png"></img>
-                        <Link className={classes.start} to='tripcreator'>Empezar</Link>
+                <div className={classes.nav}>
+                    <img className={classes.logo} src="/images/logo3.png"></img>
+                    <div className={classes.logreg}>
+                        {!user && <Link className={classes.links} to='login'><span className={classes.span2}>Iniciar Sesión</span></Link>}
+                        {!user && <Link className={classes.links} to='register'>Registrarse</Link>}
+                        {user && <p className={classes.user}><span className={classes.span2}>Hola {user.fullname}!</span> </p>}
                     </div>
+
+                    {user && <p className={classes.logout} onClick={handleLogout}>Cerrar sesión</p>}
+
                 </div>
 
+                <div className={classes.container}>
+
+                    <div className={classes.info}>
+                        <p className={classes.legend}>Conoce los destinos turísticos que más vayan contigo, las personas que más enriquezcan tu viaje y las mejores playlist para el camino, todo en <span className={classes.span}>un solo lugar</span>.</p>
+
+                        <div className={classes.promo}>
+                            <img className={classes.logo} src="/images/logo3.png"></img>
+                            <Link className={classes.start} to='tripcreator'>Empezar</Link>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    );
+        );
 
 }
 
@@ -44,8 +60,11 @@ const useStyles = makeStyles(theme => ({
     span: {
         color: '#FFDA15',
     },
-    logreg: {
+    user: {
         color: 'white',
+        fontSize: '1.5em',
+    },
+    logreg: {
         fontSize: '1.5em',
         display: 'flex',
         flexDirection: 'column',
@@ -54,10 +73,19 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: '5%',
         marginTop: '15%',
         justifyContent: 'space-evenly',
-
-        '& p': {
-            margin: 0,
-        }
+    },
+    logout: {
+        marginTop: '505px',
+        color: 'rgba(255, 255, 255, 0.8)',
+        marginRight: '160px',
+    },
+    span2: {
+        fontWeight: 'bold',
+    },
+    links: {
+        margin: 0,
+        textDecoration: 'none',
+        color: 'white',
     },
     legend: {
         color: 'white',
@@ -85,6 +113,7 @@ const useStyles = makeStyles(theme => ({
         display: ' flex',
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'flex-start',
         width: '20%',
         height: '100%',
         position: 'fixed',
@@ -101,7 +130,7 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundImage: 'url(/paises/atenas2.jpg)',
+        backgroundImage: 'url(/paises/rome2.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100% 100%',
     },
