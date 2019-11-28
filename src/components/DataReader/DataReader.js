@@ -7,6 +7,8 @@ import User from '../User/User';
 import Destinations from '../Destinations/Destinations';
 import People from '../People/People';
 import Music from '../Music/Music';
+import Place from '../Place/Place';
+import Place2 from '../Place2/Place2';
 
 function DataReader(props) {
 
@@ -1083,7 +1085,8 @@ function DataReader(props) {
 
                     </div>
 
-                    {selected4 && <User
+                    {selected4 && <Place
+                        foto={selected4.foto}
                         nombre={selected4.Destino}
                         message='Este destino es ideal para ti y este grupo de amigos.' />}
 
@@ -1139,19 +1142,23 @@ function DataReader(props) {
                         </section>
                     </div>
 
-                    {selected5 && <User
-                        nombre={selected5.Destino}
-                        message='Este destino es parecido a estos otros.' />}
+                    <div className={classes.user2}>
+                        {selected5 && <Place2
+                            foto={selected5.foto}
+                            nombre={selected5.Destino}
+                            message='Este destino es similar a estos otros.' />}
 
-                    <div className={classes.recomendation}>
-                        <ul className={classes.rcommendedListPlace}>
-                            {listaDestinos5.map((item, i) =>
-                                <Destinations
-                                    foto={item.foto}
-                                    destino={item.destino}
-                                    valork={item.valorK} />
-                            )}
-                        </ul>
+                        <div className={classes.group}>
+                            <p className={classes.yourGroup}>Tu grupo.</p>
+                            <ul className={classes.groupFotos}>
+                                {listaDestinos5.map((item, i) =>
+                                    <div className={classes.groupMemberPlace}>
+                                        <div className={classes.imagePlaceRecomGroup} style={{ backgroundImage: `url(${item.foto})` }}></div>
+                                        <p className={classes.namePGroup}>{item.destino} {item.valorK}</p>
+                                    </div>
+                                )}
+                            </ul>
+                        </div>
                     </div>
 
                     <p className={classes.txtRcommend}>Posibles Interesados</p>
@@ -1278,7 +1285,7 @@ function DataReader(props) {
                             <input className={classes.inputNumber7} onChange={handleAcompañantes7} type='number' placeholder='Numero de acompañantes' />
                             <button className={classes.startBtn7} onClick={formulaCos7}>Start</button>
                         </section>
-                        
+
                         <section className={classes.input7}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
@@ -1288,7 +1295,7 @@ function DataReader(props) {
                             <input className={classes.inputNumber7} onChange={handleLugares7} type='number' placeholder='Numero de lugares recomendados' />
                             <button className={classes.startBtn7} onClick={formulaCos7b}>Start</button>
                         </section>
-        
+
                         <section className={classes.input7}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
@@ -1552,6 +1559,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     rcommendedList: {
+        flexGrow: 1,
         height: '100%',
         margin: 0,
         padding: 0,
@@ -1583,6 +1591,7 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
         padding: 0,
         marginBottom: 0,
+        margin: 0,
     },
 
     user2: {
@@ -1601,6 +1610,17 @@ const useStyles = makeStyles(theme => ({
     imagePersonRecomGroup: {
         width: '60%',
         margin: 0,
+    },
+
+    imagePlaceRecomGroup: {
+        width: 90,
+        height: 90,
+        margin: 0,
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        borderRadius: '100%',
+        margin: 0,
+        backgroundColor: '#3E94F9',
     },
 
     yourGroup: {
@@ -1625,6 +1645,15 @@ const useStyles = makeStyles(theme => ({
         marginRight: 5,
     },
 
+    groupMemberPlace: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxSizing: 'border-box',
+        marginRight: 25,
+    },
+
     namePGroup: {
         margin: 0,
         fontFamily: 'Lato',
@@ -1636,126 +1665,134 @@ const useStyles = makeStyles(theme => ({
         color: '#5C5C5C',
     },
 
-    rcommendedListPlace: {
-        height: '100%',
-        margin: 0,
-        padding: 0,
+    group: {
         display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
+        alignItems: 'flex-start',
+        //justifyContent: 'flex-start',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
     },
+
+    rcommendedListPlace: {
+    height: '100%',
+    margin: 0,
+    padding: 0,
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+},
 
     //--------------Pregunta3------------------------
 
     main3: {
-        width: '100%',
-        height: '100%',
-    },
+    width: '100%',
+    height: '100%',
+},
 
     //--------------Pregunta4------------------------
 
     main4: {
-        width: '100%',
-        height: '100%',
-    },
+    width: '100%',
+    height: '100%',
+},
 
     //--------------Pregunta5------------------------
 
     main5: {
-        width: '100%',
-        height: '100%',
-    },
+    width: '100%',
+    height: '100%',
+},
 
     //--------------Pregunta6------------------------
 
     main6: {
-        width: '100%',
-        height: '100%',
-    },
+    width: '100%',
+    height: '100%',
+},
 
     //--------------Pregunta7------------------------
 
     main7: {
-        width: '100%',
-        height: '100%',
-    },
+    width: '100%',
+    height: '100%',
+},
 
     input7: {
-        marginRight: 30,
-    },
+    marginRight: 30,
+},
 
     inputUser7: {
-        height: 40,
-        width: 200,
-        background: '#FFFFFF',
-        borderRadius: '26.5px',
-        padding: 10,
-        border: 'none',
-        outline: 0,
+    height: 40,
+    width: 200,
+    background: '#FFFFFF',
+    borderRadius: '26.5px',
+    padding: 10,
+    border: 'none',
+    outline: 0,
 
-        fontFamily: 'Lato',
-        fontStyle: 'normal',
-        fontSize: '15px',
-        lineHeight: '29px',
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontSize: '15px',
+    lineHeight: '29px',
 
-        color: '#727272',
-    },
+    color: '#727272',
+},
 
     inputNumber7: {
-        height: 40,
-        width: 200,
-        background: '#FFFFFF',
-        borderRadius: '26.5px',
-        border: 'none',
-        padding: 15,
+    height: 40,
+    width: 200,
+    background: '#FFFFFF',
+    borderRadius: '26.5px',
+    border: 'none',
+    padding: 15,
 
-        fontFamily: 'Lato',
-        fontStyle: 'normal',
-        fontSize: '15px',
-        lineHeight: '29px',
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontSize: '15px',
+    lineHeight: '29px',
 
-        color: '#727272',
+    color: '#727272',
 
-    },
+},
 
     rcommendedMusic: {
-        height: '100%',
-        margin: 0,
-        padding: 0,
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-    },
+    height: '100%',
+    margin: 0,
+    padding: 0,
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+},
 
     txtRcommend: {
-        margin: 0,
-        marginTop: 20,
-        marginBottom: 10,
-        fontFamily: 'Lato',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '20px',
-        lineHeight: '34px',
+    margin: 0,
+    marginTop: 20,
+    marginBottom: 10,
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '20px',
+    lineHeight: '34px',
 
-        color: '#727272',
-    },
+    color: '#727272',
+},
 
     startBtn7: {
-        height: 40,
-        width: 60,
-        background: '#FFDA15',
-        borderRadius: '26.5px',
-        border: 'none',
-        marginLeft: 15,
+    height: 40,
+    width: 60,
+    background: '#FFDA15',
+    borderRadius: '26.5px',
+    border: 'none',
+    marginLeft: 15,
 
-        fontFamily: 'Lato',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '15px',
-        lineHeight: '29px',
+    fontFamily: 'Lato',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: '15px',
+    lineHeight: '29px',
 
-        color: '#3E94F9',
-    },
+    color: '#3E94F9',
+},
 
 }));
 
