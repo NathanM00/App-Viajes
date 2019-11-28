@@ -29,7 +29,7 @@ function Main({ user }) {
             <div className={classes.container}>
 
                 <div className={classes.info}>
-                    <p className={classes.legend}>Conoce los destinos turísticos que mas vayan contigo, las personas que mas enriquezcan tu viaje y las mejor playlist para el camino, todo en <span className={classes.span}>un solo lugar</span>.</p>
+                    <p className={classes.legend}>Conoce los destinos turísticos que más vayan contigo, las personas que más enriquezcan tu viaje y las mejores playlist para el camino, todo en <span className={classes.span}>un solo lugar</span>.</p>
 
                     <div className={classes.promo}>
                         <img className={classes.logo} src="/images/logo3.png"></img>
@@ -123,7 +123,7 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundImage: 'url(/paises/atenas2.jpg)',
+        backgroundImage: 'url(/paises/rome2.jpg)',
         backgroundRepeat: 'no-repeat',
         backgroundSize: '100% 100%',
     },
