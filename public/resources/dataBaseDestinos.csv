@@ -1,25 +1,25 @@
 foto,Destino,País,Clima frío,Clima caliente,Clima templado,Campo,Montañas,Playa,Ríos,Discotecas,Aventura,Relajación,Viaje en carro,Viaje en avión,Viaje en bus,Viaje en tren,Viaje en barco,Temporada alta,Temporada baja,Presupuesto,Museos,Ciudad,Lejanía,Cercanía,Guía,Hotel ,Hostal,Carpa,Casa,Caminata,Buceo,Asia,África,Oceanía,Europa,América,Gastronomía,Festivales,Carnavales
 /paises/marrakech.png,Marrakech,Marruecos,3,5,10,10,0,0,10,8,10,5,2,10,10,10,0,2,10,6,6,10,10,2,6,10,10,0,10,10,0,7,10,2,5,0,10,8,3
-/paises/marrakech.png,Armenia,Colombia,0,10,5,10,10,0,7,4,7,10,10,10,10,0,0,5,0,4,5,10,3,7,10,10,10,10,6,10,0,0,0,0,3,10,6,4,4
-/paises/armenia.png,Estambul,Turquía,10,2,4,0,0,10,0,10,3,8,10,10,10,10,10,5,9,8,10,10,10,2,7,10,7,0,5,10,5,0,0,0,10,0,10,8,2
+/paises/armenia.png,Armenia,Colombia,0,10,5,10,10,0,7,4,7,10,10,10,10,0,0,5,0,4,5,10,3,7,10,10,10,10,6,10,0,0,0,0,3,10,6,4,4
+/paises/estambul.png,Estambul,Turquía,10,2,4,0,0,10,0,10,3,8,10,10,10,10,10,5,9,8,10,10,10,2,7,10,7,0,5,10,5,0,0,0,10,0,10,8,2
 /paises/hanoi.png,Hanoi,Vietnam,0,10,4,3,8,0,10,7,10,10,8,10,7,3,3,10,10,7,10,10,8,2,8,8,5,0,7,10,10,10,8,6,7,3,10,10,10
 /paises/praga.png,Praga,Republica Checa,10,3,2,6,6,0,9,10,8,9,8,10,10,8,0,8,9,8,10,10,8,2,7,10,8,3,8,7,0,5,7,2,10,4,8,8,6
 /paises/londres.png,Londres,Inglaterra,10,0,3,6,9,5,10,6,5,8,2,10,8,10,10,5,8,10,10,10,8,1,8,10,5,2,10,9,5,0,0,0,10,0,6,6,6
 /paises/roma.png,Roma,Italia,10,2,4,5,10,0,6,10,8,7,10,10,10,10,10,10,10,9,10,9,8,5,10,10,10,0,10,8,0,5,5,0,10,3,10,0,10
-/paises/marrakech.png,Buenos Aires,Argentina,3,10,5,5,10,10,8,10,10,8,10,10,10,8,8,9,4,6,6,10,3,7,6,10,9,5,10,10,5,0,0,0,0,10,8,10,10
-/paises/marrakech.png,Paris,Francia,10,2,2,0,0,0,3,6,10,3,10,10,10,10,0,5,10,10,10,10,9,1,5,10,7,0,10,5,0,5,3,9,0,5,10,8,4
+/paises/buenosAires.png,Buenos Aires,Argentina,3,10,5,5,10,10,8,10,10,8,10,10,10,8,8,9,4,6,6,10,3,7,6,10,9,5,10,10,5,0,0,0,0,10,8,10,10
+/paises/paris.png,Paris,Francia,10,2,2,0,0,0,3,6,10,3,10,10,10,10,0,5,10,10,10,10,9,1,5,10,7,0,10,5,0,5,3,9,0,5,10,8,4
 /paises/bogota.png,Bogotá,Colombia,5,3,10,6,1,0,1,8,6,3,10,10,10,0,0,7,5,7,6,10,1,8,5,10,10,4,6,7,0,0,0,2,0,10,7,6,2
 /paises/newYork.png,New York,Estados Unidos,7,3,9,2,0,0,3,10,7,3,1,10,0,0,1,4,8,9,10,10,10,3,10,10,6,0,10,10,0,0,0,0,0,10,10,4,4
-/paises/marrakech.png,Cartagena,Colombia,0,10,2,0,0,10,6,10,10,10,10,10,10,0,8,10,10,6,7,10,2,7,4,10,10,5,7,10,10,0,0,0,3,10,10,8,4
+/paises/cartagena.png,Cartagena,Colombia,0,10,2,0,0,10,6,10,10,10,10,10,10,0,8,10,10,6,7,10,2,7,4,10,10,5,7,10,10,0,0,0,3,10,10,8,4
 /paises/barcelon.png,Barcelona,España,10,0,3,3,4,4,8,10,10,4,10,10,10,10,10,5,10,10,10,10,7,3,10,10,8,1,5,10,8,0,0,0,10,0,8,8,6
-/paises/marrakech.png,Goreme,Turquía,10,0,4,0,4,0,0,2,10,9,5,10,6,3,0,4,7,8,3,10,7,3,10,10,9,5,5,10,0,10,0,0,0,0,8,7,3
-/paises/marrakech.png,Ubud,Indonesia,0,10,7,10,10,10,9,9,10,9,3,10,9,2,5,10,7,4,10,6,4,7,8,10,9,0,4,10,10,9,0,8,0,0,9,5,5
-/paises/marrakech.png,Cusco,Peru,4,5,10,10,10,0,7,2,10,4,9,8,9,10,0,8,3,6,10,7,4,6,10,9,6,8,6,10,0,0,0,0,0,10,6,3,3
+/paises/goreme.png,Goreme,Turquía,10,0,4,0,4,0,0,2,10,9,5,10,6,3,0,4,7,8,3,10,7,3,10,10,9,5,5,10,0,10,0,0,0,0,8,7,3
+/paises/ubud.png,Ubud,Indonesia,0,10,7,10,10,10,9,9,10,9,3,10,9,2,5,10,7,4,10,6,4,7,8,10,9,0,4,10,10,9,0,8,0,0,9,5,5
+/paises/cusco.png,Cusco,Peru,4,5,10,10,10,0,7,2,10,4,9,8,9,10,0,8,3,6,10,7,4,6,10,9,6,8,6,10,0,0,0,0,0,10,6,3,3
 /paises/stPetesburgo.png,St. Petersburg,Rusia,10,0,2,3,0,5,10,10,7,4,7,10,8,10,0,8,6,7,10,10,8,2,7,9,8,0,6,7,0,7,6,6,10,5,10,8,8
 /paises/bangkok.png,Bangkok,Tailandia,0,10,5,6,7,10,5,3,9,8,3,8,10,7,8,5,5,6,7,10,6,4,8,9,5,2,5,5,7,10,0,0,0,0,8,4,4
-/paises/marrakech.png,Atenas,Grecia,6,2,8,5,7,10,7,8,6,9,7,9,9,8,10,5,8,9,10,9,8,3,7,10,8,2,5,6,7,6,7,4,10,3,6,5,5
-/paises/marrakech.png,Budapest,Hungria,9,2,10,9,9,8,3,9,9,8,5,6,10,6,7,7,5,7,8,10,7,3,8,9,5,3,7,7,7,0,0,0,10,0,10,8,6
+/paises/atenas.png,Atenas,Grecia,6,2,8,5,7,10,7,8,6,9,7,9,9,8,10,5,8,9,10,9,8,3,7,10,8,2,5,6,7,6,7,4,10,3,6,5,5
+/paises/budapest.png,Budapest,Hungria,9,2,10,9,9,8,3,9,9,8,5,6,10,6,7,7,5,7,8,10,7,3,8,9,5,3,7,7,7,0,0,0,10,0,10,8,6
 /paises/tokyo.png,Tokyo,Japón,10,0,5,8,8,5,6,6,7,7,5,10,8,9,7,6,6,8,8,8,8,1,9,10,10,3,7,8,1,10,0,0,3,0,10,7,7
 /paises/hongkong.png,Hong Kong,China,4,5,10,3,3,3,2,8,6,5,4,10,8,10,10,7,7,9,10,10,9,1,8,10,8,2,7,7,0,10,0,0,0,0,10,7,5
-/paises/marrakech.png,Dubai,Emiratos Arabes Unidos,3,10,5,2,0,10,1,10,8,7,7,10,6,10,10,8,6,10,8,10,8,2,5,10,7,0,8,7,5,10,0,0,0,0,8,2,3
+/paises/dubai.png,Dubai,Emiratos Arabes Unidos,3,10,5,2,0,10,1,10,8,7,7,10,6,10,10,8,6,10,8,10,8,2,5,10,7,0,8,7,5,10,0,0,0,0,8,2,3
 /paises/sydney.png,Sydney,Australia,5,4,10,4,5,7,4,10,7,8,0,10,0,0,10,5,8,10,10,10,10,0,10,10,10,0,10,7,8,0,0,10,0,0,10,7,4
