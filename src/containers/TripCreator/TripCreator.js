@@ -10,6 +10,7 @@ function TripCreator({ user }) {
     const classes = useStyles();
     const [question, setQuestion] = React.useState(1);
     const [rows, setRows] = React.useState([]);
+    var newUser;
     var profilePicture;
     //lectura de base de datos de Gente
     React.useEffect(() => {
@@ -38,17 +39,19 @@ function TripCreator({ user }) {
 
     if (!user) {
         return <Redirect to="/login" />;
-    }
-
-    if (user) {
+    } else {
         for (let index = 0; index < newArray.length; index++) {
             if (newArray[index].nombres === user.fullname) {
-                profilePicture = newArray[index].foto
-            } else {
-                profilePicture = '/images/anonimo.png'
+                newUser =false;
+                profilePicture = newArray[index].foto;
             }
         }
     }
+
+    if (newUser) {
+        profilePicture = '/images/anonimo.png'
+    } 
+
 
     return (
         <div className={classes.main}>
