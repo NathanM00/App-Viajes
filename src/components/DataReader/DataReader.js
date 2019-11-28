@@ -6,6 +6,7 @@ import { fb } from '../../utils/firebase';
 import User from '../User/User';
 import Destinations from '../Destinations/Destinations';
 import People from '../People/People';
+import Music from '../Music/Music';
 
 function DataReader(props) {
 
@@ -1157,7 +1158,7 @@ function DataReader(props) {
                         </ul>
                     </div>
 
-                    <p>Posibles Interesados</p>
+                    <p className={classes.txtRcommend}>Posibles Interesados</p>
                     <div className={classes.recomendation}>
                         <ul className={classes.rcommendedList}>
                             {listaOrdenados5.map((item, i) =>
@@ -1181,57 +1182,80 @@ function DataReader(props) {
                                 <p className={classes.inputText}>Escoge tu usuario.</p>
                             </div>
 
-                            <input />
+                            <select className={classes.inputUser} value={selectIndex6} onChange={handleChange6}>
+                                <option value="">-</option>
+
+                                {newArray.map((item, i) =>
+                                    <option value={i} key={i}>{item.nombres}</option>
+                                )}
+                            </select>
                         </section>
+
+                        <button onClick={formulaCos6}>Start</button>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                                <p className={classes.inputText}>Escoge el número de destinos similares.</p>
                             </div>
 
-                            <input />
+                            <input className={classes.inputNumber} onChange={handleLugares6} type='number' placeholder='Numero de destinos similares' />
                         </section>
+
+                        <button onClick={formulaCos6b}>Start</button>
+
+                        <section className={classes.input}>
+                            <div className={classes.instruction}>
+                                <div className={classes.mandalorian}></div>
+                                <p className={classes.inputText}>Escoge el número de personas.</p>
+                            </div>
+
+                            <input className={classes.inputNumber} onChange={handleAcompañantes6} type='number' placeholder='Numero de personas' />
+                        </section>
+
+                        <button onClick={formulaCos6c}>Start</button>
                     </div>
 
-                    <h1>Pregunta 6</h1>
-                    <p>Selecciona la persona base</p>
-                    <select value={selectIndex6} onChange={handleChange6}>
-                        <option value="">-</option>
+                    {selected6 && <User
+                        foto={selected6.foto}
+                        nombre={selected6.nombres}
+                        message='Este destino es el ideal para ti.' />}
 
-                        {newArray.map((item, i) =>
-                            <option value={i} key={i}>{item.nombres}</option>
-                        )}
-                    </select>
-                    {selected6 && <div>
-                        {selected6.nombres}
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedListPlace}>
+                            {listaDestinos6.map((item, i) =>
+                                <Destinations
+                                    foto={item.foto}
+                                    destino={item.destino}
+                                    valork={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
 
-                    </div>}
-                    <button onClick={formulaCos6}>Start</button>
-                    <p>Destinos Ideal</p>
-                    <ul>
-                        {listaDestinos6.map((item, i) =>
-                            <li>{item.destino}{item.valorK}</li>
-                        )}
-                    </ul>
-                    <p>Selecciona el numero de destinos similares</p>
-                    <input onChange={handleLugares6} type='number' placeholder='Numero de destinos similares' />
-                    <button onClick={formulaCos6b}>Start</button>
-                    <p>Destinos Similares</p>
-                    <ul>
-                        {listaDestinos6b.map((item, i) =>
-                            <li>{item.destino}{item.valorK}</li>
-                        )}
-                    </ul>
-                    <p>Selecciona el numero de personas</p>
-                    <input onChange={handleAcompañantes6} type='number' placeholder='Numero de personas' />
-                    <button onClick={formulaCos6c}>Start</button>
-                    <p>Posibles Interesados</p>
-                    <ul>
-                        {listaOrdenados6.map((item, i) =>
-                            <li>{item.persona}{item.valorK}</li>
-                        )}
-                    </ul>
+                    <p className={classes.txtRcommend}>Destinos Similares.</p>
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedListPlace}>
+                            {listaDestinos6b.map((item, i) =>
+                                <Destinations
+                                    foto={item.foto}
+                                    destino={item.destino}
+                                    valork={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
+
+                    <p className={classes.txtRcommend}>De acuerdo a esos destinos, ellos son los posibles interesados.</p>
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedList}>
+                            {listaOrdenados6.map((item, i) =>
+                                <People
+                                    foto={item.foto}
+                                    persona={item.persona}
+                                    valorK={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
+
                     <Button onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
@@ -1243,57 +1267,89 @@ function DataReader(props) {
                                 <p className={classes.inputText}>Escoge tu usuario.</p>
                             </div>
 
-                            <input />
+                            <select className={classes.inputUser} value={selectIndex7} onChange={handleChange7}>
+                                <option value="">-</option>
+
+                                {newArray.map((item, i) =>
+                                    <option value={i} key={i}>{item.nombres}</option>
+                                )}
+                            </select>
                         </section>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                                <p className={classes.inputText}>Escoge el número de personas en tu grupo.</p>
                             </div>
 
-                            <input />
+                            <input className={classes.inputNumber} onChange={handleAcompañantes7} type='number' placeholder='Numero de acompañantes' />
                         </section>
+
+                        <button onClick={formulaCos7}>Start</button>
+
+                        <section className={classes.input}>
+                            <div className={classes.instruction}>
+                                <div className={classes.mandalorian}></div>
+                                <p className={classes.inputText}>Escoge el número de lugares.</p>
+                            </div>
+
+                            <input className={classes.inputNumber} onChange={handleLugares7} type='number' placeholder='Numero de lugares recomendados' />
+                        </section>
+
+                        <button onClick={formulaCos7b}>Start</button>
+
+                        <section className={classes.input}>
+                            <div className={classes.instruction}>
+                                <div className={classes.mandalorian}></div>
+                                <p className={classes.inputText}>Escoge el número de canciones.</p>
+                            </div>
+
+                            <input className={classes.inputNumber} onChange={handleCanciones7} type='number' placeholder='Numero de canciones' />
+                        </section>
+
+                        <button onClick={formulaCos7c}>Start</button>
                     </div>
 
-                    <h1>Pregunta 7</h1>
-                    <p>Selecciona la persona base</p>
-                    <select value={selectIndex7} onChange={handleChange7}>
-                        <option value="">-</option>
+                    <div className={classes.user2}>
+                        {selected7 && <div className={classes.userInfo}>
+                            <img className={classes.selectedImage} src={selected7.foto} />
+                            <section className={classes.text}>
+                                <p className={classes.selectedName}>{selected7.nombres}</p>
+                                <p className={classes.message}>Tu y tu grupo de amigos podrian ir a estos lugares.</p>
+                            </section>
+                        </div>}
 
-                        {newArray.map((item, i) =>
-                            <option value={i} key={i}>{item.nombres}</option>
-                        )}
-                    </select>
-                    {selected7 && <div>
-                        {selected7.nombres}
+                        <div className={classes.group}>
+                            <p className={classes.yourGroup}>Tu grupo.</p>
+                            <ul className={classes.groupFotos}>
+                                {listaOrdenados7.map((item, i) =>
+                                    <div className={classes.groupMember}>
+                                        <img className={classes.imagePersonRecomGroup} src={item.foto} />
+                                        <p className={classes.namePGroup}>{item.persona} {item.valorK}</p>
+                                    </div>
+                                )}
+                            </ul>
+                        </div>
+                    </div>
 
-                    </div>}
-                    <p>Selecciona el numero de acompañantes</p>
-                    <input onChange={handleAcompañantes7} type='number' placeholder='Numero de acompañantes' />
-                    <button onClick={formulaCos7}>Start</button>
-                    <p>Acompañantes recomendados</p>
-                    <ul>
-                        {listaOrdenados7.map((item, i) =>
-                            <li>{item.persona}{item.valorK}</li>
-                        )}
-                    </ul>
-                    <p>Segun el grupo de personas anterior, selecciona el numero de lugares</p>
-                    <input onChange={handleLugares7} type='number' placeholder='Numero de lugares recomendados' />
-                    <button onClick={formulaCos7b}>Start</button>
-                    <p>Destinos recomendados</p>
-                    <ul>
-                        {listaDestinos7.map((item, i) =>
-                            <li>{item.destino}{item.valorK}</li>
-                        )}
-                    </ul>
-                    <p>Selecciona el numero de canciones</p>
-                    <input onChange={handleCanciones7} type='number' placeholder='Numero de canciones' />
-                    <button onClick={formulaCos7c}>Start</button>
-                    <p>Canciones recomendadas</p>
-                    <ul>
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedListPlace}>
+                            {listaDestinos7.map((item, i) =>
+                                <Destinations
+                                    foto={item.foto}
+                                    destino={item.destino}
+                                    valork={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
+
+                    <p className={classes.txtRcommend}>Canciones recomendadas para estos destinos.</p>
+                    <ul className={classes.rcommendedMusic}>
                         {listaCanciones7.map((item, i) =>
-                            <li>{item.cancion} {item.valorK}</li>
+                            <Music
+                                foto={item.foto}
+                                cancion={item.cancion}
+                                valork={item.valorK} />
                         )}
                     </ul>
                     <Button onClick={handleSavePlan}>Guardar plan</Button>
@@ -1598,6 +1654,28 @@ const useStyles = makeStyles(theme => ({
     main7: {
         width: '100%',
         height: '100%',
+    },
+
+    rcommendedMusic: {
+        height: '100%',
+        margin: 0,
+        padding: 0,
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
+
+    txtRcommend: {
+        margin: 0,
+        marginTop: 20,
+        marginBottom: 10,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '20px',
+        lineHeight: '34px',
+
+        color: '#727272',
     },
 
 }));
