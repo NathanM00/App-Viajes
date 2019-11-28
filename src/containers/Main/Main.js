@@ -101,10 +101,13 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundImage: 'url(/paises/atenas2.jpg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
     },
 
     info: {
-        background: 'rgba(26, 26, 26, 0.5)',
+        background: 'rgba(26, 26, 26, 0.8)',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
