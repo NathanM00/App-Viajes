@@ -1,10 +1,15 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Link } from "react-router-dom";
+import { fb } from '../../utils/firebase';
 
-function Main(props) {
+function Main({ user }) {
 
     const classes = useStyles();
+
+    const handleLogout = () => {
+        fb.auth().signOut();
+    }
 
     return (
         <div className={classes.app}>
@@ -12,9 +17,13 @@ function Main(props) {
             <div className={classes.nav}>
                 <img className={classes.logo} src="/images/logo3.png"></img>
                 <div className={classes.logreg}>
-                    <p>Login</p>
-                    <p>Register</p>
+                    {!user && <Link className={classes.links} to='login'><span className={classes.span2}>Iniciar Sesión</span></Link>}
+                    {!user && <Link className={classes.links} to='register'>Registrarse</Link>}
+                    {user && <p className={classes.user}><span className={classes.span2}>Hola {user.fullname}!</span> </p>}
                 </div>
+
+                {user && <p className={classes.logout} onClick={handleLogout}>Cerrar sesión</p>}
+
             </div>
 
             <div className={classes.container}>
@@ -44,8 +53,11 @@ const useStyles = makeStyles(theme => ({
     span: {
         color: '#FFDA15',
     },
-    logreg: {
+    user: {
         color: 'white',
+        fontSize: '1.5em',
+    },
+    logreg: {
         fontSize: '1.5em',
         display: 'flex',
         flexDirection: 'column',
@@ -54,10 +66,19 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: '5%',
         marginTop: '15%',
         justifyContent: 'space-evenly',
-
-        '& p': {
-            margin: 0,
-        }
+    },
+    logout: {
+        marginTop:'505px',
+        color: 'rgba(255, 255, 255, 0.8)',
+        marginRight:'160px',
+    },
+    span2: {
+        fontWeight: 'bold',
+    },
+    links: {
+        margin: 0,
+        textDecoration: 'none',
+        color: 'white',
     },
     legend: {
         color: 'white',
@@ -85,6 +106,7 @@ const useStyles = makeStyles(theme => ({
         display: ' flex',
         flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'flex-start',
         width: '20%',
         height: '100%',
         position: 'fixed',

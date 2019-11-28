@@ -5,7 +5,7 @@ import { fb } from '../../utils/firebase';
 import { Redirect } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
-const Login = ({ user }) => {
+const Register = ({ user }) => {
     const classes = useStyles();
     const [error, setError] = React.useState(null);
 
@@ -13,12 +13,26 @@ const Login = ({ user }) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
+        const passwordConfirmation = event.target.passwordConfirmation.value;
+        const fullname = event.target.fullname.value;
 
-        fb.auth().signInWithEmailAndPassword(email, password)
-            .catch(function (error) {
-                var errorMessage = error.message;
-                setError(errorMessage);
-            });
+        if (password === passwordConfirmation) {
+            fb.auth().createUserWithEmailAndPassword(email, password)
+                .then(function (info) {
+                    var user = fb.auth().currentUser;
+                    let db = fb.firestore();
+                    db.collection('users').doc(user.uid).set({
+                        fullname: fullname,
+                        email: email,
+                    });
+                })
+                .catch(function (error) {
+                    var errorMessage = error.message;
+                    setError(errorMessage);
+                });
+        } else {
+            setError('Wrong password confirmation.');
+        }
     }
 
     if (user) {
@@ -31,13 +45,11 @@ const Login = ({ user }) => {
             <Grid item md={5}>
                 <Paper className={classes.root}>
                     <div className={classes.up}>
-                        <Typography variant="h3" className={classes.tittle}>Inicio</Typography>
+                        <Typography variant="h3" className={classes.tittle}>Registro</Typography>
                         <Link className={classes.links} to='/'>
                             <img className={classes.logo} src="/images/logodark.png"></img>
                         </Link>
                     </div>
-
-
                     <form onSubmit={handleSubmit} className={classes.form}>
 
                         <TextField
@@ -58,18 +70,35 @@ const Login = ({ user }) => {
                             margin="normal"
                         />
 
+                        <TextField
+                            className={classes.field}
+                            required
+                            name="passwordConfirmation"
+                            label="Confirmar contraseña"
+                            type="password"
+                            margin="normal"
+                        />
+
+                        <TextField
+                            className={classes.field}
+                            required
+                            name="fullname"
+                            label="Nombre Completo"
+                            margin="normal"
+                        />
+
                         {error && <Typography className={classes.error}>{error}</Typography>}
                         <div className={classes.bottom} >
-                            <Button className={classes.button} type="submit" >Iniciar</Button>
-                            <Link className={classes.register} to="register" >No tienes cuenta? Registrate</Link>
+                            <Button className={classes.button} type="submit" >Registrarse</Button>
+                            <Link className={classes.register} to="login" >Ya tienes cuenta? Inicia sesión</Link>
                         </div>
                     </form>
                 </Paper>
             </Grid>
 
-        </Grid>
-    );
+        </Grid>);
 }
+
 const useStyles = makeStyles(theme => ({
 
     root: {
@@ -104,6 +133,7 @@ const useStyles = makeStyles(theme => ({
     button: {
         background: '#FFDA15',
         color: '#3E94F9',
+        
     },
     register: {
         color: '#3E94F9',
@@ -115,7 +145,6 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         alignItems: 'center',
         marginTop: '30px',
-        color: '#3E94F9',
         marginBottom: '10px'
 
     },
@@ -124,4 +153,4 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default Login;
+export default Register;
