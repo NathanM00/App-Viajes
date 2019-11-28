@@ -836,12 +836,12 @@ function DataReader(props) {
         ref.get().then(function (doc) {
             if (doc.exists) {
                 console.log("Document collection:", doc.data().counter);
-                var ownCounter =  doc.data().counter +1;
+                var ownCounter = doc.data().counter + 1;
                 ref.update({
                     counter: fb.firestore.FieldValue.increment(1)
                 });
 
-                ref.collection("userPlans").doc(""+ownCounter).set(docData).then(function () {
+                ref.collection("userPlans").doc("" + ownCounter).set(docData).then(function () {
                     console.log("Plan exitoso");
                 }).catch(function (error) {
                     console.error("Error writing document: ", error);
@@ -898,9 +898,10 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleAcompañantes} type='number' placeholder='Número de acompañantes' />
+
+                            <button className={classes.startBtn} onClick={formulaCos}>Start</button>
                         </section>
 
-                        <button onClick={formulaCos}>Start</button>
                     </div>
 
                     <div className={classes.user}>
@@ -921,7 +922,7 @@ function DataReader(props) {
                         </ul>
                     </div>
 
-                    <Button onClick={handleSavePlan}>Guardar plan</Button>
+                    <Button className={classes.savePlan} onClick={handleSavePlan}>Guardar plan</Button>
 
                 </div>
                 }
@@ -950,6 +951,7 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleAcompañantes2} type='number' placeholder='Numero de acompañantes' />
+                            <button className={classes.startBtn} onClick={formulaCos2}>Start</button>
                         </section>
 
                         <section className={classes.input}>
@@ -959,9 +961,8 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleLugares2} type='number' placeholder='Número de lugares recomendados' />
+                            <button className={classes.startBtn} onClick={formulaCos2b}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos2}>Start</button>
                     </div>
 
                     <div className={classes.user2}>
@@ -986,8 +987,6 @@ function DataReader(props) {
                         </div>
                     </div>
 
-                    <button onClick={formulaCos2b}>Start</button>
-
                     <div className={classes.recomendation}>
                         <ul className={classes.rcommendedListPlace}>
                             {listaDestinos2.map((item, i) =>
@@ -999,7 +998,7 @@ function DataReader(props) {
                         </ul>
                     </div>
 
-                    <Button onClick={handleSavePlan}>Guardar plan</Button>
+                    <Button className={classes.savePlan} onClick={handleSavePlan}>Guardar plan</Button>
 
                 </div>
                 }
@@ -1028,9 +1027,9 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleLugares3} type='number' placeholder='Numero de lugares recomendados' />
+                            <button className={classes.startBtn} onClick={formulaCos3}>Start</button>
                         </section>
 
-                        <button onClick={formulaCos3}>Start</button>
                     </div>
 
                     <div className={classes.user}>
@@ -1051,7 +1050,7 @@ function DataReader(props) {
                         </ul>
                     </div>
 
-                    <Button onClick={handleSavePlan}>Guardar plan</Button>
+                    <Button className={classes.savePlan} onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
 
@@ -1079,9 +1078,8 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleAcompañantes4} type='number' placeholder='Numero de personas' />
+                            <button className={classes.startBtn} onClick={formulaCos4}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos4}>Start</button>
 
                     </div>
 
@@ -1100,7 +1098,7 @@ function DataReader(props) {
                         </ul>
                     </div>
 
-                    <Button onClick={handleSavePlan}>Guardar plan</Button>
+                    <Button className={classes.savePlan} onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
                 {props.question === 5 && <div className={classes.main5}>
@@ -1127,9 +1125,8 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleLugares5} type='number' placeholder='Numero de destinos similares' />
+                            <button className={classes.startBtn} onClick={formulaCos5}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos5}>Start</button>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
@@ -1138,9 +1135,8 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleAcompañantes5} type='number' placeholder='Numero de personas' />
+                            <button className={classes.startBtn} onClick={formulaCos5b}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos5b}>Start</button>
                     </div>
 
                     {selected5 && <User
@@ -1170,7 +1166,7 @@ function DataReader(props) {
                         </ul>
                     </div>
 
-                    <Button onClick={handleSavePlan}>Guardar plan</Button>
+                    <Button className={classes.savePlan} onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
 
@@ -1189,9 +1185,8 @@ function DataReader(props) {
                                     <option value={i} key={i}>{item.nombres}</option>
                                 )}
                             </select>
+                            <button className={classes.startBtn} onClick={formulaCos6}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos6}>Start</button>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
@@ -1200,9 +1195,8 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleLugares6} type='number' placeholder='Numero de destinos similares' />
+                            <button className={classes.startBtn} onClick={formulaCos6b}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos6b}>Start</button>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
@@ -1211,9 +1205,8 @@ function DataReader(props) {
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleAcompañantes6} type='number' placeholder='Numero de personas' />
+                            <button className={classes.startBtn} onClick={formulaCos6c}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos6c}>Start</button>
                     </div>
 
                     {selected6 && <User
@@ -1256,18 +1249,18 @@ function DataReader(props) {
                         </ul>
                     </div>
 
-                    <Button onClick={handleSavePlan}>Guardar plan</Button>
+                    <Button className={classes.savePlan} onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
                 {props.question === 7 && <div className={classes.main7}>
                     <div className={classes.inputs}>
-                        <section className={classes.input}>
+                        <section className={classes.input7}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
                                 <p className={classes.inputText}>Escoge tu usuario.</p>
                             </div>
 
-                            <select className={classes.inputUser} value={selectIndex7} onChange={handleChange7}>
+                            <select className={classes.inputUser7} value={selectIndex7} onChange={handleChange7}>
                                 <option value="">-</option>
 
                                 {newArray.map((item, i) =>
@@ -1276,38 +1269,35 @@ function DataReader(props) {
                             </select>
                         </section>
 
-                        <section className={classes.input}>
+                        <section className={classes.input7}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge el número de personas en tu grupo.</p>
+                                <p className={classes.inputText}>Escoge el número de personas.</p>
                             </div>
 
-                            <input className={classes.inputNumber} onChange={handleAcompañantes7} type='number' placeholder='Numero de acompañantes' />
+                            <input className={classes.inputNumber7} onChange={handleAcompañantes7} type='number' placeholder='Numero de acompañantes' />
+                            <button className={classes.startBtn7} onClick={formulaCos7}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos7}>Start</button>
-
-                        <section className={classes.input}>
+                        
+                        <section className={classes.input7}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
                                 <p className={classes.inputText}>Escoge el número de lugares.</p>
                             </div>
 
-                            <input className={classes.inputNumber} onChange={handleLugares7} type='number' placeholder='Numero de lugares recomendados' />
+                            <input className={classes.inputNumber7} onChange={handleLugares7} type='number' placeholder='Numero de lugares recomendados' />
+                            <button className={classes.startBtn7} onClick={formulaCos7b}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos7b}>Start</button>
-
-                        <section className={classes.input}>
+        
+                        <section className={classes.input7}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
                                 <p className={classes.inputText}>Escoge el número de canciones.</p>
                             </div>
 
                             <input className={classes.inputNumber} onChange={handleCanciones7} type='number' placeholder='Numero de canciones' />
+                            <button className={classes.startBtn7} onClick={formulaCos7c}>Start</button>
                         </section>
-
-                        <button onClick={formulaCos7c}>Start</button>
                     </div>
 
                     <div className={classes.user2}>
@@ -1352,7 +1342,7 @@ function DataReader(props) {
                                 valork={item.valorK} />
                         )}
                     </ul>
-                    <Button onClick={handleSavePlan}>Guardar plan</Button>
+                    <Button className={classes.savePlan} onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
             </section>
@@ -1468,6 +1458,40 @@ const useStyles = makeStyles(theme => ({
 
         color: '#727272',
 
+    },
+
+    startBtn: {
+        height: 40,
+        width: 100,
+        background: '#FFDA15',
+        borderRadius: '26.5px',
+        border: 'none',
+        marginLeft: 35,
+
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '15px',
+        lineHeight: '29px',
+
+        color: '#3E94F9',
+    },
+
+    savePlan: {
+        height: 60,
+        width: 220,
+        background: '#FFDA15',
+        borderRadius: '26.5px',
+        border: 'none',
+        marginTop: 25,
+
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '15px',
+        lineHeight: '29px',
+
+        color: '#3E94F9',
     },
 
     user: {
@@ -1656,6 +1680,44 @@ const useStyles = makeStyles(theme => ({
         height: '100%',
     },
 
+    input7: {
+        marginRight: 30,
+    },
+
+    inputUser7: {
+        height: 40,
+        width: 200,
+        background: '#FFFFFF',
+        borderRadius: '26.5px',
+        padding: 10,
+        border: 'none',
+        outline: 0,
+
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontSize: '15px',
+        lineHeight: '29px',
+
+        color: '#727272',
+    },
+
+    inputNumber7: {
+        height: 40,
+        width: 200,
+        background: '#FFFFFF',
+        borderRadius: '26.5px',
+        border: 'none',
+        padding: 15,
+
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontSize: '15px',
+        lineHeight: '29px',
+
+        color: '#727272',
+
+    },
+
     rcommendedMusic: {
         height: '100%',
         margin: 0,
@@ -1676,6 +1738,23 @@ const useStyles = makeStyles(theme => ({
         lineHeight: '34px',
 
         color: '#727272',
+    },
+
+    startBtn7: {
+        height: 40,
+        width: 60,
+        background: '#FFDA15',
+        borderRadius: '26.5px',
+        border: 'none',
+        marginLeft: 15,
+
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '15px',
+        lineHeight: '29px',
+
+        color: '#3E94F9',
     },
 
 }));
