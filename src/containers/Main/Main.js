@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Link } from "react-router-dom";
 import { fb } from '../../utils/firebase';
+import { Redirect } from 'react-router-dom';
 
 function Main({ user }) {
 
@@ -11,35 +12,41 @@ function Main({ user }) {
         fb.auth().signOut();
     }
 
-    return (
-        <div className={classes.app}>
+    if (user){
+            return(
+                 <Redirect to="/tripcreator" />
+            )
+    }
 
-            <div className={classes.nav}>
-                <img className={classes.logo} src="/images/logo3.png"></img>
-                <div className={classes.logreg}>
-                    {!user && <Link className={classes.links} to='login'><span className={classes.span2}>Iniciar Sesión</span></Link>}
-                    {!user && <Link className={classes.links} to='register'>Registrarse</Link>}
-                    {user && <p className={classes.user}><span className={classes.span2}>Hola {user.fullname}!</span> </p>}
-                </div>
+        return (
+            <div className={classes.app}>
 
-                {user && <p className={classes.logout} onClick={handleLogout}>Cerrar sesión</p>}
-
-            </div>
-
-            <div className={classes.container}>
-
-                <div className={classes.info}>
-                    <p className={classes.legend}>Conoce los destinos turísticos que más vayan contigo, las personas que más enriquezcan tu viaje y las mejores playlist para el camino, todo en <span className={classes.span}>un solo lugar</span>.</p>
-
-                    <div className={classes.promo}>
-                        <img className={classes.logo} src="/images/logo3.png"></img>
-                        <Link className={classes.start} to='tripcreator'>Empezar</Link>
+                <div className={classes.nav}>
+                    <img className={classes.logo} src="/images/logo3.png"></img>
+                    <div className={classes.logreg}>
+                        {!user && <Link className={classes.links} to='login'><span className={classes.span2}>Iniciar Sesión</span></Link>}
+                        {!user && <Link className={classes.links} to='register'>Registrarse</Link>}
+                        {user && <p className={classes.user}><span className={classes.span2}>Hola {user.fullname}!</span> </p>}
                     </div>
+
+                    {user && <p className={classes.logout} onClick={handleLogout}>Cerrar sesión</p>}
+
                 </div>
 
+                <div className={classes.container}>
+
+                    <div className={classes.info}>
+                        <p className={classes.legend}>Conoce los destinos turísticos que más vayan contigo, las personas que más enriquezcan tu viaje y las mejores playlist para el camino, todo en <span className={classes.span}>un solo lugar</span>.</p>
+
+                        <div className={classes.promo}>
+                            <img className={classes.logo} src="/images/logo3.png"></img>
+                            <Link className={classes.start} to='tripcreator'>Empezar</Link>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
-    );
+        );
 
 }
 
@@ -68,9 +75,9 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'space-evenly',
     },
     logout: {
-        marginTop:'505px',
+        marginTop: '505px',
         color: 'rgba(255, 255, 255, 0.8)',
-        marginRight:'160px',
+        marginRight: '160px',
     },
     span2: {
         fontWeight: 'bold',

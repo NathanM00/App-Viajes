@@ -27,9 +27,7 @@ function TripCreator({user}) {
         <div className={classes.main}>
             <div className={classes.app}>
                 <section className={classes.nav}>
-                    <Link to='/'>
                         <img className={classes.logo} src="/images/logo3.png"></img>
-                    </Link>
 
                     <section className={classes.btnConatiner}>
                         <button className={classes.navButtons} value={1} onClick={handleQuestion}>Personas similares</button>
@@ -87,7 +85,6 @@ const useStyles = makeStyles(theme => ({
     logo: {
         width: '70%',
         marginBottom: '60px',
-        marginLeft: '40px',
     },
 
     btnConatiner: {
