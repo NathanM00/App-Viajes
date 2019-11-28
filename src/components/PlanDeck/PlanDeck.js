@@ -79,37 +79,40 @@ function DataReader(props) {
                     )}
                 </div>
                 <div className={classes.planDetails}>
+                    <h3 className={classes.title}>Plan {data.id}</h3>
 
-                    <ul>
-                        {data.partners !== undefined && data.partners.map((item, i) =>
-                            <li >
-                                <img src={item.foto} />
-                                <p>{item.persona}</p>
-                                <p>{item.valorK}</p>
-                            </li>
-                        )}
-                    </ul>
-
-                    <ul>
-                        {data.places !== undefined && data.places.map((item, i) =>
-                            <li >
-                                <img src={item.foto} />
-                                <p>{item.destino}</p>
-                                <p>{item.valorK}</p>
-                            </li>
-                        )}
-                    </ul>
-
-                    <ul>
-                        {data.songs !== undefined && data.songs.map((item, i) =>
-                            <li >
-                                <img src={item.foto} />
-                                <p>{item.cancion}</p>
-                                <p>{item.valorK}</p>
-                            </li>
-                        )}
-                    </ul>
-
+                    <div className={classes.container}>
+                        <div className={classes.columns}>
+                            <h3 className={classes.subtitle}>Acompañantes</h3>
+                            {data.partners !== undefined && data.partners.map((item, i) =>
+                                <div className={classes.item}>
+                                    <img className={classes.itemPic} src={item.foto} />
+                                    <p className={classes.itemName}>{item.persona}</p>
+                                    <p className={classes.itemK}>{item.valorK}</p>
+                                </div>
+                            )}
+                        </div>
+                        <div className={classes.columns}>
+                            <h3 className={classes.subtitle}>Destinos</h3>
+                            {data.places !== undefined && data.places.map((item, i) =>
+                                <div className={classes.item}>
+                                    <img className={classes.itemPic} src={item.foto} />
+                                    <p className={classes.itemName}>{item.destino}</p>
+                                    <p className={classes.itemK}>{item.valorK}</p>
+                                </div>
+                            )}
+                        </div>
+                        <div className={classes.columns}>
+                            <h3 className={classes.subtitle}>Playlist</h3>
+                            {data.songs !== undefined && data.songs.map((item, i) =>
+                                <div className={classes.item}>
+                                    <img className={classes.itemPic} src={item.foto} />
+                                    <p className={classes.itemName}>{item.cancion}</p>
+                                    <p className={classes.itemK}>{item.valorK}</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
 
                 </div>
 
@@ -122,6 +125,49 @@ function DataReader(props) {
 }
 
 const useStyles = makeStyles(theme => ({
+    title: {
+        color: '#282828',
+        fontSize: '1.9em',
+        paddingLeft:'30px',
+    },
+    subtitle: {
+        color:'#5C5C5C',
+        color:'#3E94F9',
+        fontSize: '1.5em',
+        marginTop: 0,
+    },
+    item: {
+        width: '100%',
+        height: '20%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+    },
+    itemPic: {
+        width: '20%',
+    },
+    itemK: {
+        fontSize: '1em',
+        color:'#3E94F9',
+        width: '10%',
+    },
+    itemName: {
+        fontSize: '1.3em',
+        color:'#5C5C5C',
+        width: '60%',
+    },
+    container:{
+        width: '100%',
+        height: '90%',
+        flexDirection: 'row',
+        display: 'flex',
+        justifyContent:'space-evenly',
+    },
+    columns:{
+        width: '30%',
+        height: '100%',
+    },
     main: {
         width: '100%',
         height: '100%',
@@ -135,7 +181,7 @@ const useStyles = makeStyles(theme => ({
         height: '60%',
         background: 'white',
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'column',
     },
     planList: {
         width: '95%',
