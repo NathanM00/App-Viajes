@@ -3,6 +3,9 @@ import Papa from 'papaparse'
 import { makeStyles } from '@material-ui/styles';
 import { Button } from '@material-ui/core';
 import { fb } from '../../utils/firebase';
+import User from '../User/User';
+import Destinations from '../Destinations/Destinations';
+import People from '../People/People';
 
 function DataReader(props) {
 
@@ -794,7 +797,7 @@ function DataReader(props) {
     }
 
     function handleSavePlan() {
-        let acompanantes = 'Solo tu haces parte de este plan';
+        let acompanantes = 'Solo tu haces parte de este plan.';
         let canciones = 'Ninguna cancion en el plan.';
         let lugares = 'Ningun destino en el plan.';
 
@@ -810,7 +813,6 @@ function DataReader(props) {
             lugares = Object.values(selected4);
         } else if (props.question === 5) {
             acompanantes = listaOrdenados5;
-            canciones = 'Ninguna Cancion en el plan';
             lugares = listaDestinos5;
         } else if (props.question === 6) {
             acompanantes = listaOrdenados6;
@@ -827,6 +829,7 @@ function DataReader(props) {
             partners: acompanantes,
             songs: canciones,
             places: lugares,
+            isPlanned: true,
         };
 
         ref.get().then(function (doc) {
@@ -900,29 +903,28 @@ function DataReader(props) {
                     </div>
 
                     <div className={classes.user}>
-                        {selected && <div className={classes.userInfo}>
-                            <img className={classes.selectedImage} src={selected.foto} />
-                            <section className={classes.text}>
-                                <p className={classes.selectedName}>{selected.nombres}</p>
-                                <p className={classes.message}>y estas personas tienen gustos similares.</p>
-                            </section>
-                        </div>}
+                        {selected && <User
+                            foto={selected.foto}
+                            nombre={selected.nombres}
+                            message='Tu y estas personas tienen gustos similares.' />}
                     </div>
 
                     <div className={classes.recomendation}>
                         <ul className={classes.rcommendedList}>
                             {listaOrdenados.map((item, i) =>
-                                <div className={classes.listItem}>
-                                    <img className={classes.imagePersonRecom} src={item.foto} />
-                                    <p className={classes.namePersonRecom}>{item.persona}</p>
-                                    <p className={classes.similarity}><span className={classes.percentage}>{item.valorK}</span> de similitud</p>
-                                </div>
+                                <People
+                                    foto={item.foto}
+                                    persona={item.persona}
+                                    valorK={item.valorK} />
                             )}
                         </ul>
                     </div>
+
                     <Button onClick={handleSavePlan}>Guardar plan</Button>
+
                 </div>
                 }
+
                 {props.question === 2 && <div className={classes.main2}>
                     <div className={classes.inputs}>
                         <section className={classes.input}>
@@ -983,24 +985,24 @@ function DataReader(props) {
                         </div>
                     </div>
 
-                    <p>Segun el grupo de personas anterior, selecciona el numero de lugares</p>
                     <button onClick={formulaCos2b}>Start</button>
 
-                    <p>Destinos recomendados</p>
                     <div className={classes.recomendation}>
-                        <ul className={classes.rcommendedList}>
+                        <ul className={classes.rcommendedListPlace}>
                             {listaDestinos2.map((item, i) =>
-                                <div className={classes.listItem}>
-                                    <img className={classes.imagePersonRecom} src={item.foto} />
-                                    <p className={classes.namePersonRecom}>{item.destino}</p>
-                                    <p className={classes.similarity}><span className={classes.percentage}>{item.valorK}</span> de similitud</p>
-                                </div>
+                                <Destinations
+                                    foto={item.foto}
+                                    destino={item.destino}
+                                    valork={item.valorK} />
                             )}
                         </ul>
                     </div>
+
                     <Button onClick={handleSavePlan}>Guardar plan</Button>
+
                 </div>
                 }
+
                 {props.question === 3 && <div className={classes.main3}>
                     <div className={classes.inputs}>
                         <section className={classes.input}>
@@ -1009,88 +1011,94 @@ function DataReader(props) {
                                 <p className={classes.inputText}>Escoge tu usuario.</p>
                             </div>
 
-                            <input />
+                            <select className={classes.inputUser} value={selectIndex3} onChange={handleChange3}>
+                                <option value="">-</option>
+
+                                {newArray.map((item, i) =>
+                                    <option value={i} key={i}>{item.nombres}</option>
+                                )}
+                            </select>
                         </section>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                                <p className={classes.inputText}>Escoge el número de destinos.</p>
                             </div>
 
-                            <input />
+                            <input className={classes.inputNumber} onChange={handleLugares3} type='number' placeholder='Numero de lugares recomendados' />
                         </section>
+
+                        <button onClick={formulaCos3}>Start</button>
                     </div>
 
-                    <h1>Pregunta 3</h1>
-                    <p>Selecciona la persona base</p>
-                    <select value={selectIndex3} onChange={handleChange3}>
-                        <option value="">-</option>
+                    <div className={classes.user}>
+                        {selected3 && <User
+                            foto={selected3.foto}
+                            nombre={selected3.nombres}
+                            message='Estos destinos son ideales para ti.' />}
+                    </div>
 
-                        {newArray.map((item, i) =>
-                            <option value={i} key={i}>{item.nombres}</option>
-                        )}
-                    </select>
-                    {selected3 && <div>
-                        {selected3.nombres}
-                    </div>}
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedListPlace}>
+                            {listaDestinos3.map((item, i) =>
+                                <Destinations
+                                    foto={item.foto}
+                                    destino={item.destino}
+                                    valork={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
 
-                    <p>Selecciona el numero de destinos</p>
-                    <input onChange={handleLugares3} type='number' placeholder='Numero de lugares recomendados' />
-                    <button onClick={formulaCos3}>Start</button>
-                    <p>Destinos recomendados</p>
-                    <ul>
-                        {listaDestinos3.map((item, i) =>
-                            <li>{item.destino}{item.valorK}</li>
-                        )}
-                    </ul>
                     <Button onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
+
                 {props.question === 4 && <div className={classes.main4}>
                     <div className={classes.inputs}>
                         <section className={classes.input}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge tu usuario.</p>
+                                <p className={classes.inputText}>Escoge tu destino.</p>
                             </div>
 
-                            <input />
+                            <select className={classes.inputUser} value={selectIndex4} onChange={handleChange4}>
+                                <option value="">-</option>
+
+                                {newArray2.map((item, i) =>
+                                    <option value={i} key={i}>{item.Destino}</option>
+                                )}
+                            </select>
                         </section>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                                <p className={classes.inputText}>Escoge el número de personas.</p>
                             </div>
 
-                            <input />
+                            <input className={classes.inputNumber} onChange={handleAcompañantes4} type='number' placeholder='Numero de personas' />
                         </section>
+
+                        <button onClick={formulaCos4}>Start</button>
+
                     </div>
 
-                    <h1>Pregunta 4</h1>
-                    <p>Selecciona el destino base</p>
-                    <select value={selectIndex4} onChange={handleChange4}>
-                        <option value="">-</option>
+                    {selected4 && <User
+                        nombre={selected4.Destino}
+                        message='Este destino es ideal para ti y este grupo de amigos.' />}
 
-                        {newArray2.map((item, i) =>
-                            <option value={i} key={i}>{item.Destino}</option>
-                        )}
-                    </select>
-                    {selected4 && <div>
-                        {selected4.Destino}
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedList}>
+                            {listaOrdenados4.map((item, i) =>
+                                <People
+                                    foto={item.foto}
+                                    persona={item.persona}
+                                    valorK={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
 
-                    </div>}
-
-                    <p>Selecciona el numero de personas</p>
-                    <input onChange={handleAcompañantes4} type='number' placeholder='Numero de personas' />
-                    <button onClick={formulaCos4}>Start</button>
-                    <p>Personas recomendadas</p>
-                    <ul>
-                        {listaOrdenados4.map((item, i) =>
-                            <li>{item.persona}{item.valorK}</li>
-                        )}
-                    </ul>
                     <Button onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
@@ -1099,56 +1107,72 @@ function DataReader(props) {
                         <section className={classes.input}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge tu usuario.</p>
+                                <p className={classes.inputText}>Escoge tu destino.</p>
                             </div>
 
-                            <input />
+                            <select className={classes.inputUser} value={selectIndex5} onChange={handleChange5}>
+                                <option value="">-</option>
+
+                                {newArray2.map((item, i) =>
+                                    <option value={i} key={i}>{item.Destino}</option>
+                                )}
+                            </select>
                         </section>
 
                         <section className={classes.input}>
                             <div className={classes.instruction}>
                                 <div className={classes.mandalorian}></div>
-                                <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                                <p className={classes.inputText}>Escoge el número de destinos para comparar.</p>
                             </div>
 
-                            <input />
+                            <input className={classes.inputNumber} onChange={handleLugares5} type='number' placeholder='Numero de destinos similares' />
                         </section>
+
+                        <button onClick={formulaCos5}>Start</button>
+
+                        <section className={classes.input}>
+                            <div className={classes.instruction}>
+                                <div className={classes.mandalorian}></div>
+                                <p className={classes.inputText}>Escoge el número de personas para este destino.</p>
+                            </div>
+
+                            <input className={classes.inputNumber} onChange={handleAcompañantes5} type='number' placeholder='Numero de personas' />
+                        </section>
+
+                        <button onClick={formulaCos5b}>Start</button>
                     </div>
 
-                    <h1>Pregunta 5</h1>
-                    <p>Selecciona el destino base</p>
-                    <select value={selectIndex5} onChange={handleChange5}>
-                        <option value="">-</option>
+                    {selected5 && <User
+                        nombre={selected5.Destino}
+                        message='Este destino es parecido a estos otros.' />}
 
-                        {newArray2.map((item, i) =>
-                            <option value={i} key={i}>{item.Destino}</option>
-                        )}
-                    </select>
-                    {selected5 && <div>
-                        {selected5.Destino}
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedListPlace}>
+                            {listaDestinos5.map((item, i) =>
+                                <Destinations
+                                    foto={item.foto}
+                                    destino={item.destino}
+                                    valork={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
 
-                    </div>}
-                    <p>Selecciona el numero de destinos similares</p>
-                    <input onChange={handleLugares5} type='number' placeholder='Numero de destinos similares' />
-                    <button onClick={formulaCos5}>Start</button>
-                    <p>Destinos Similares</p>
-                    <ul>
-                        {listaDestinos5.map((item, i) =>
-                            <li>{item.destino}{item.valorK}</li>
-                        )}
-                    </ul>
-                    <p>Selecciona el numero de personas</p>
-                    <input onChange={handleAcompañantes5} type='number' placeholder='Numero de personas' />
-                    <button onClick={formulaCos5b}>Start</button>
                     <p>Posibles Interesados</p>
-                    <ul>
-                        {listaOrdenados5.map((item, i) =>
-                            <li>{item.persona}{item.valorK}</li>
-                        )}
-                    </ul>
+                    <div className={classes.recomendation}>
+                        <ul className={classes.rcommendedList}>
+                            {listaOrdenados5.map((item, i) =>
+                                <People
+                                    foto={item.foto}
+                                    persona={item.persona}
+                                    valorK={item.valorK} />
+                            )}
+                        </ul>
+                    </div>
+
                     <Button onClick={handleSavePlan}>Guardar plan</Button>
                 </div>
                 }
+
                 {props.question === 6 && <div className={classes.main6}>
                     <div className={classes.inputs}>
                         <section className={classes.input}>
@@ -1456,47 +1480,6 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
     },
 
-    listItem: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '20%',
-        height: '100%',
-        padding: 15,
-        marginRight: 15,
-        marginBottom: 15,
-        background: '#FFFFFF',
-        borderRadius: '14px',
-    },
-
-    imagePersonRecom: {
-        width: '60%',
-        marginBottom: 20,
-    },
-
-    namePersonRecom: {
-        margin: 0,
-        marginBottom: 15,
-        fontFamily: 'Lato',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '25px',
-        lineHeight: '43px',
-
-        color: '#5C5C5C',
-    },
-
-    percentage: {
-        fontFamily: 'Lato',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '20px',
-        lineHeight: '34px',
-
-        color: '#3E94F9',
-    },
-
     similarity: {
         margin: 0,
         fontFamily: 'Lato',
@@ -1525,7 +1508,6 @@ const useStyles = makeStyles(theme => ({
     user2: {
         display: 'flex',
         justifyContent: 'space-between',
-        //alignItems: 'center',
         boxSizing: 'border-box',
         width: '100%',
         height: '25%',
@@ -1572,6 +1554,15 @@ const useStyles = makeStyles(theme => ({
         lineHeight: '43px',
 
         color: '#5C5C5C',
+    },
+
+    rcommendedListPlace: {
+        height: '100%',
+        margin: 0,
+        padding: 0,
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
     },
 
     //--------------Pregunta3------------------------

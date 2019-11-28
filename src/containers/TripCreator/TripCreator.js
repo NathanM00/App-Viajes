@@ -3,10 +3,8 @@ import Papa from 'papaparse'
 import DataReader from '../../components/DataReader/DataReader';
 import PlanDeck from '../../components/PlanDeck/PlanDeck';
 import { makeStyles } from '@material-ui/styles';
-import { Link } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 import { fb } from '../../utils/firebase';
-import { Button } from '@material-ui/core';
 
 function TripCreator({ user }) {
     const classes = useStyles();
@@ -35,7 +33,7 @@ function TripCreator({ user }) {
         setQuestion(currentQuestion);
     }
 
-    const handleLogout = () => {
+    function handleLogout(event) {
         fb.auth().signOut();
     }
 
