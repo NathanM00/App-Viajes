@@ -1,10 +1,12 @@
 import React from 'react';
 import Papa from 'papaparse'
 import DataReader from '../../components/DataReader/DataReader';
+import PlanDeck from '../../components/PlanDeck/PlanDeck';
 import { makeStyles } from '@material-ui/styles';
 import { Link } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 import { fb } from '../../utils/firebase';
+import { Button } from '@material-ui/core';
 
 function TripCreator({ user }) {
     const classes = useStyles();
@@ -42,7 +44,7 @@ function TripCreator({ user }) {
     } else {
         for (let index = 0; index < newArray.length; index++) {
             if (newArray[index].nombres === user.fullname) {
-                newUser =false;
+                newUser = false;
                 profilePicture = newArray[index].foto;
             }
         }
@@ -50,8 +52,7 @@ function TripCreator({ user }) {
 
     if (newUser) {
         profilePicture = '/images/anonimo.png'
-    } 
-
+    }
 
     return (
         <div className={classes.main}>
@@ -67,10 +68,11 @@ function TripCreator({ user }) {
                         <button className={classes.navButtons} value={5} onClick={handleQuestion}>Destinos para amigos</button>
                         <button className={classes.navButtons} value={6} onClick={handleQuestion}>Tus destinos para los demás</button>
                         <button className={classes.navButtons} value={7} onClick={handleQuestion}>Música para tus viajes</button>
-                        <Link className={classes.navPlans} to="plans">Mis planes</Link>
+                        <button className={classes.navPlans}   value={8} onClick={handleQuestion}> Mis planes</button>
                     </section>
 
                     <section className={classes.profile}>
+                        <br />
                         <img src={profilePicture} className={classes.profilePic} />
                         <section className={classes.profileTexts}>
                             <p className={classes.profileName}>{user.fullname}</p>
@@ -83,9 +85,8 @@ function TripCreator({ user }) {
                 </section>
 
                 <section className={classes.window}>
-
                     <DataReader question={question} className={classes.infoVisualization}></DataReader>
-
+                    <PlanDeck question={question} className={classes.infoVisualization}></PlanDeck>
                 </section>
             </div>
         </div>
@@ -94,35 +95,45 @@ function TripCreator({ user }) {
 
 const useStyles = makeStyles(theme => ({
     profile: {
-        background: "white",
         width: '100%',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
+        background: "white",
         borderTopLeftRadius: '10px',
         borderBottomLeftRadius: '10px',
     },
     profileCountry: {
         color: '#717171',
         fontSize: '1em',
+        margin: 0,
     },
     profileTexts: {
-        width: '50%',
+        width: '60%',
+        background: "white",
+        fontWeight: 'bold',
+        margin: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
     },
     profileName: {
         color: '#282828',
+        margin: 0,
         fontSize: '1.3em',
-        fontWeight: 'bold',
+        marginBottom: '10px',
     },
     profilePic: {
         width: '30%',
+        paddingTop: '5px',
+        paddingBottom: '5px',
     },
     main: {
         width: '100%',
         height: '100%',
     },
     logout: {
-        color: 'rgba(255, 255, 255, 0.8)',
+        color: 'white',
         marginRight: '160px',
     },
     app: {
