@@ -796,13 +796,16 @@ function DataReader(props) {
                             <p className={classes.inputText}>Escoge tu usuario.</p>
                         </div>
 
-                        <select value={selectIndex} onChange={handleChange}>
-                            <option value="">-</option>
+                        <div className={classes.edit}>
+                            <select className={classes.inputUser} value={selectIndex} onChange={handleChange}>
+                                <option value="">-</option>
 
-                            {newArray.map((item, i) =>
-                                <option value={i} key={i}>{item.nombres}</option>
-                            )}
-                        </select>
+                                {newArray.map((item, i) =>
+                                    <option value={i} key={i}>{item.nombres}</option>
+                                )}
+                            </select>
+                            <div className={classes.dropBtn}></div>
+                        </div>
                     </section>
 
                     <section className={classes.input}>
@@ -811,7 +814,7 @@ function DataReader(props) {
                             <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
                         </div>
 
-                        <input onChange={handleAcompañantes} type='number' placeholder='Numero de acompañantes' />
+                        <input className={classes.inputNumber} onChange={handleAcompañantes} type='number' placeholder='Número de acompañantes' />
                     </section>
 
                     <button onClick={formulaCos}>Start</button>
@@ -819,7 +822,7 @@ function DataReader(props) {
 
                 <div className={classes.user}>
                     {selected && <div className={classes.userInfo}>
-                        <img className={classes.selectedImage} src={selected.foto}/>
+                        <img className={classes.selectedImage} src={selected.foto} />
                         <section className={classes.text}>
                             <p className={classes.selectedName}>{selected.nombres}</p>
                             <p className={classes.message}>Tu y estas personas tienen gustos similares.</p>
@@ -831,7 +834,7 @@ function DataReader(props) {
                     <ul className={classes.rcommendedList}>
                         {listaOrdenados.map((item, i) =>
                             <div className={classes.listItem}>
-                                <img className={classes.imagePersonRecom} src={item.foto}/>
+                                <img className={classes.imagePersonRecom} src={item.foto} />
                                 <p className={classes.namePersonRecom}>{item.persona}</p>
                                 <p className={classes.similarity}><span className={classes.percentage}>{item.valorK}</span> de similitud</p>
                             </div>
@@ -841,7 +844,7 @@ function DataReader(props) {
 
             </div>
             }
-            {props.question === 2 && <div>
+            {props.question === 2 && <div className={classes.main2}>
                 <div className={classes.inputs}>
                     <section className={classes.input}>
                         <div className={classes.instruction}>
@@ -849,53 +852,76 @@ function DataReader(props) {
                             <p className={classes.inputText}>Escoge tu usuario.</p>
                         </div>
 
-                        <input />
+                        <select className={classes.inputUser} value={selectIndex2} onChange={handleChange2}>
+                            <option value="">-</option>
+
+                            {newArray.map((item, i) =>
+                                <option value={i} key={i}>{item.nombres}</option>
+                            )}
+                        </select>
                     </section>
 
                     <section className={classes.input}>
                         <div className={classes.instruction}>
                             <div className={classes.mandalorian}></div>
-                            <p className={classes.inputText}>Escoge el número de personas para comparar.</p>
+                            <p className={classes.inputText}>Escoge el número de acompañantes.</p>
                         </div>
 
-                        <input />
+                        <input className={classes.inputNumber} onChange={handleAcompañantes2} type='number' placeholder='Numero de acompañantes' />
                     </section>
+
+                    <section className={classes.input}>
+                        <div className={classes.instruction}>
+                            <div className={classes.mandalorian}></div>
+                            <p className={classes.inputText}>Escoge el número de lugares.</p>
+                        </div>
+
+                        <input className={classes.inputNumber} onChange={handleLugares2} type='number' placeholder='Número de lugares recomendados' />
+                    </section>
+
+                    <button onClick={formulaCos2}>Start</button>
                 </div>
 
-                <h1>Pregunta 2</h1>
-                <p>Selecciona la persona base</p>
-                <select value={selectIndex2} onChange={handleChange2}>
-                    <option value="">-</option>
+                <div className={classes.user2}>
+                    {selectIndex2 && <div className={classes.userInfo}>
+                        <img className={classes.selectedImage} src={selected2.foto} />
+                        <section className={classes.text}>
+                            <p className={classes.selectedName}>{selected2.nombres}</p>
+                            <p className={classes.message}>Tu y tu grupo de amigos podrian ir a estos lugares.</p>
+                        </section>
+                    </div>}
 
-                    {newArray.map((item, i) =>
-                        <option value={i} key={i}>{item.nombres}</option>
-                    )}
-                </select>
-                {selectIndex2 && <div>
-                    {selected2.nombres}
+                    <div className={classes.group}>
+                        <p className={classes.yourGroup}>Tu grupo.</p>
+                        <ul className={classes.groupFotos}>
+                            {listaOrdenados2.map((item, i) =>
+                                <div className={classes.groupMember}>
+                                    <img className={classes.imagePersonRecomGroup} src={item.foto} />
+                                    <p className={classes.namePGroup}>{item.persona} {item.valorK}</p>
+                                </div>
+                            )}
+                        </ul>
+                    </div>
+                </div>
 
-                </div>}
-                <p>Selecciona el numero de acompañantes</p>
-                <input onChange={handleAcompañantes2} type='number' placeholder='Numero de acompañantes' />
-                <button onClick={formulaCos2}>Start</button>
-                <p>Acompañantes recomendados</p>
-                <ul>
-                    {listaOrdenados2.map((item, i) =>
-                        <li>{item.persona}{item.valorK}</li>
-                    )}
-                </ul>
                 <p>Segun el grupo de personas anterior, selecciona el numero de lugares</p>
-                <input onChange={handleLugares2} type='number' placeholder='Numero de lugares recomendados' />
                 <button onClick={formulaCos2b}>Start</button>
+
                 <p>Destinos recomendados</p>
-                <ul>
-                    {listaDestinos2.map((item, i) =>
-                        <li>{item.destino}{item.valorK}</li>
-                    )}
-                </ul>
+                <div className={classes.recomendation}>
+                    <ul className={classes.rcommendedList}>
+                        {listaDestinos2.map((item, i) =>
+                            <div className={classes.listItem}>
+                                <img className={classes.imagePersonRecom} src={item.foto} />
+                                <p className={classes.namePersonRecom}>{item.destino}</p>
+                                <p className={classes.similarity}><span className={classes.percentage}>{item.valorK}</span> de similitud</p>
+                            </div>
+                        )}
+                    </ul>
+                </div>
             </div>
             }
-            {props.question === 3 && <div>
+            {props.question === 3 && <div className={classes.main3}>
                 <div className={classes.inputs}>
                     <section className={classes.input}>
                         <div className={classes.instruction}>
@@ -940,7 +966,7 @@ function DataReader(props) {
                 </ul>
             </div>
             }
-            {props.question === 4 && <div>
+            {props.question === 4 && <div className={classes.main4}>
                 <div className={classes.inputs}>
                     <section className={classes.input}>
                         <div className={classes.instruction}>
@@ -986,7 +1012,7 @@ function DataReader(props) {
                 </ul>
             </div>
             }
-            {props.question === 5 && <div>
+            {props.question === 5 && <div className={classes.main5}>
                 <div className={classes.inputs}>
                     <section className={classes.input}>
                         <div className={classes.instruction}>
@@ -1040,7 +1066,7 @@ function DataReader(props) {
                 </ul>
             </div>
             }
-            {props.question === 6 && <div>
+            {props.question === 6 && <div className={classes.main6}>
                 <div className={classes.inputs}>
                     <section className={classes.input}>
                         <div className={classes.instruction}>
@@ -1101,7 +1127,7 @@ function DataReader(props) {
                 </ul>
             </div>
             }
-            {props.question === 7 && <div>
+            {props.question === 7 && <div className={classes.main7}>
                 <div className={classes.inputs}>
                     <section className={classes.input}>
                         <div className={classes.instruction}>
@@ -1183,8 +1209,8 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         paddingTop: '15px',
         paddingBottom: '15px',
-        paddingLeft: '25px',
-        paddingRight: '25px',
+        paddingLeft: '30px',
+        paddingRight: '30px',
         //width: '77.6%',
         width: '100%',
         height: '15%',
@@ -1198,6 +1224,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     instruction: {
+        marginBottom: 15,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -1223,6 +1250,58 @@ const useStyles = makeStyles(theme => ({
 
     },
 
+    inputUser: {
+        height: 40,
+        width: 250,
+        background: '#FFFFFF',
+        borderRadius: '26.5px',
+        padding: 10,
+        border: 'none',
+        outline: 0,
+
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontSize: '15px',
+        lineHeight: '29px',
+
+        color: '#727272',
+    },
+
+    /*dropBtn: {
+        position: 'absolut',
+        width: 40,
+        height: 40,
+        borderRadius: '100%',
+        background: '#FFDA15',
+    },*/
+
+    /*edit: {
+        paddingLeft: 10,
+        display: 'flex',
+        alignItems: 'center',
+        height: 40,
+        width: 250,
+        borderRadius: '26.5px',
+        background: '#FFFFFF',
+    },*/
+
+    inputNumber: {
+        height: 40,
+        width: 220,
+        background: '#FFFFFF',
+        borderRadius: '26.5px',
+        border: 'none',
+        padding: 15,
+
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontSize: '15px',
+        lineHeight: '29px',
+
+        color: '#727272',
+
+    },
+
     user: {
         display: 'flex',
         justifyContent: 'center',
@@ -1240,9 +1319,16 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    selectedImage:{
-        width:'10%',
+
+    text: {
+        width: '50%',
     },
+
+    selectedImage: {
+        width: '26%',
+        marginRight: 20,
+    },
+
     selectedName: {
         margin: 0,
         marginBottom: 15,
@@ -1259,9 +1345,9 @@ const useStyles = makeStyles(theme => ({
         margin: 0,
         fontFamily: 'Lato',
         fontStyle: 'normal',
-        fontWeight: 'bold',
-        fontSize: '20px',
-        lineHeight: '34px',
+        //fontWeight: 'bold',
+        fontSize: '22px',
+        lineHeight: '30px',
 
         color: '#727272',
     },
@@ -1295,9 +1381,12 @@ const useStyles = makeStyles(theme => ({
         background: '#FFFFFF',
         borderRadius: '14px',
     },
-    imagePersonRecom:{
-        width:'10%',
+
+    imagePersonRecom: {
+        width: '60%',
+        marginBottom: 20,
     },
+
     namePersonRecom: {
         margin: 0,
         marginBottom: 15,
@@ -1329,6 +1418,107 @@ const useStyles = makeStyles(theme => ({
         lineHeight: '34px',
 
         color: '#727272',
+    },
+
+    //--------------Pregunta2------------------------
+
+    main2: {
+        width: '100%',
+        height: '100%',
+    },
+
+    groupFotos: {
+        display: 'flex',
+        flexDirection: 'row',
+        padding: 0,
+        marginBottom: 0,
+    },
+
+    user2: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        //alignItems: 'center',
+        boxSizing: 'border-box',
+        width: '100%',
+        height: '25%',
+        background: '#FFFFFF',
+        borderRadius: '14px',
+        padding: 15,
+        paddingLeft: 30,
+        paddingRight: 30,
+    },
+
+    imagePersonRecomGroup: {
+        width: '60%',
+        margin: 0,
+    },
+
+    yourGroup: {
+        margin: 0,
+        marginLeft: 15,
+        marginBottom: 15,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontSize: '20px',
+        lineHeight: '34px',
+
+        color: '#727272',
+
+    },
+
+    groupMember: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxSizing: 'border-box',
+        marginRight: 5,
+    },
+
+    namePGroup: {
+        margin: 0,
+        fontFamily: 'Lato',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: '15px',
+        lineHeight: '43px',
+
+        color: '#5C5C5C',
+    },
+
+    //--------------Pregunta3------------------------
+
+    main3: {
+        width: '100%',
+        height: '100%',
+    },
+
+    //--------------Pregunta4------------------------
+
+    main4: {
+        width: '100%',
+        height: '100%',
+    },
+
+    //--------------Pregunta5------------------------
+
+    main5: {
+        width: '100%',
+        height: '100%',
+    },
+
+    //--------------Pregunta6------------------------
+
+    main6: {
+        width: '100%',
+        height: '100%',
+    },
+
+    //--------------Pregunta7------------------------
+
+    main7: {
+        width: '100%',
+        height: '100%',
     },
 
 }));
