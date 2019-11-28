@@ -178,6 +178,14 @@ const useStyles = makeStyles(theme => ({
             color: '#3E94F9',
             fontWeight: '600',
         },
+
+        '&:focus': {
+            background: "#FFDA15",
+            color: '#3E94F9',
+            fontWeight: '600',
+            border: 'none',
+            outline: 'none',
+        },
     },
 
     navPlans: {
