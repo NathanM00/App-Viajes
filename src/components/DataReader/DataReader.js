@@ -12,6 +12,9 @@ function DataReader(props) {
     const [rows2, setRows2] = React.useState([]);
     const [rows3, setRows3] = React.useState([]);
 
+    var user = fb.auth().currentUser;
+    var db = fb.firestore();
+
     //lectura de base de datos de Gente
     React.useEffect(() => {
         async function getData() {
@@ -82,7 +85,6 @@ function DataReader(props) {
 
     const [listaDestinos2, setListaDestinos2] = React.useState([]);
     const [listaDestinos3, setListaDestinos3] = React.useState([]);
-    const [listaDestinos4, setListaDestinos4] = React.useState([]);
     const [listaDestinos5, setListaDestinos5] = React.useState([]);
     const [listaDestinos6, setListaDestinos6] = React.useState([]);
     const [listaDestinos6b, setListaDestinos6b] = React.useState([]);
@@ -239,6 +241,7 @@ function DataReader(props) {
 
         }
         setListaOrdenados(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista));
+        console.log(listaOrdenados);
     }
 
     function formulaCos2() {
@@ -408,7 +411,6 @@ function DataReader(props) {
 
     function formulaCos5() {
         objetoA = Object.values(selected5).slice(2);
-        console.log(objetoA);
 
         for (let index = 0; index < newArray2.length; index++) {
             objetoB = Object.values(newArray2[index]).slice(2);
@@ -442,15 +444,17 @@ function DataReader(props) {
     }
 
     function formulaCos5b() {
-        objetoA = Object.values(selected5).slice(2);
-
+        objetoA = Object.values(selected5);
         var yoMismo = {
-            info: objetoA,
+            foto: objetoA[0],
+            destino: objetoA[1],
+            info: objetoA.slice(2),
+            valorK: "100%",
         }
 
-        let temp = listaOrdenados5;
+        let temp = listaDestinos5;
         temp.push(yoMismo);
-
+        console.log(temp);
         var promedio = [];
         promedio[37] = 0;
         var ordenado;
@@ -497,11 +501,12 @@ function DataReader(props) {
                     foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
-                    info: objetoB,
+                    info: objetoD,
                 });
             }
         }
         setListaOrdenados5(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista5b));
+        console.log(listaOrdenados5);
     }
 
     function formulaCos6() {
@@ -627,7 +632,7 @@ function DataReader(props) {
                     foto: newArray[index].foto,
                     persona: newArray[index].nombres,
                     valorK: valorFinalK + "%",
-                    info: objetoB,
+                    info: objetoD,
                 });
             }
         }
@@ -787,58 +792,76 @@ function DataReader(props) {
         }
         setListaCanciones7(nuevosK.sort((a, b) => (a.valorK > b.valorK) ? - 1 : 1).slice(0, indexLista7c));
     }
-    var contador = 1;
+
     function handleSavePlan() {
-        let acompañantes;
-        let canciones;
-        let lugares;
+        let acompanantes = 'Solo tu haces parte de este plan';
+        let canciones = 'Ninguna cancion en el plan.';
+        let lugares = 'Ningun destino en el plan.';
 
         if (props.question === 1) {
-            acompañantes = listaOrdenados;
-            canciones = 'Ninguna cancion en el plan.';
-            lugares = 'Ningun destino en el plan.';
-
+            acompanantes = listaOrdenados;
         } else if (props.question === 2) {
-            acompañantes = listaOrdenados2;
-            canciones = 'Ninguna cancion en el plan.';
+            acompanantes = listaOrdenados2;
             lugares = listaDestinos2;
         } else if (props.question === 3) {
-            acompañantes = 'Solo tu haces parte de este plan';
-            canciones = 'Ninguna Cancion en el plan';
             lugares = listaDestinos3;
         } else if (props.question === 4) {
-            acompañantes = listaOrdenados4;
-            canciones = 'Ninguna Cancion en el plan';
+            acompanantes = listaOrdenados4;
             lugares = Object.values(selected4);
         } else if (props.question === 5) {
-           /* console.log(listaOrdenados5);
-            acompañantes = listaOrdenados5;
+            acompanantes = listaOrdenados5;
             canciones = 'Ninguna Cancion en el plan';
-            lugares = listaDestinos5;*/
-        }   else if (props.question === 6) {
-            console.log('aaa');
-            /*
-                        acompañantes = listaOrdenados6;
-                        canciones = 'Ninguna Cancion en el plan';
-                        lugares = listaDestinos6b;*/
+            lugares = listaDestinos5;
+        } else if (props.question === 6) {
+            acompanantes = listaOrdenados6;
+            lugares = listaDestinos6b;
         } else if (props.question === 7) {
-            acompañantes = listaOrdenados7;
+            acompanantes = listaOrdenados7;
             canciones = listaCanciones7;
             lugares = listaDestinos7;
         }
-        console.log(acompañantes);
-        console.log(canciones);
-        console.log(lugares);
 
-        var user = fb.auth().currentUser;
-        let db = fb.firestore();
-        db.collection('plans').doc(user.uid).set({
-            planName: contador,
-            partners: acompañantes,
+        var ref = db.collection('plans').doc(user.uid);
+
+        var docData = {
+            partners: acompanantes,
             songs: canciones,
             places: lugares,
+        };
+
+        ref.get().then(function (doc) {
+            if (doc.exists) {
+                console.log("Document collection:", doc.data().counter);
+                var ownCounter =  doc.data().counter +1;
+                ref.update({
+                    counter: fb.firestore.FieldValue.increment(1)
+                });
+
+                ref.collection("userPlans").doc(""+ownCounter).set(docData).then(function () {
+                    console.log("Plan exitoso");
+                }).catch(function (error) {
+                    console.error("Error writing document: ", error);
+                });
+
+            } else {
+                ref.set({
+                    counter: 1,
+                }).then(function () {
+                    console.log("primer contador exitoso");
+                }).catch(function (error) {
+                    console.error("Error writing document: ", error);
+                });
+
+                ref.collection("userPlans").doc("1").set(docData).then(function () {
+                    console.log("Primer plan exitoso");
+                }).catch(function (error) {
+                    console.error("Error writing document: ", error);
+                });
+            }
+        }).catch(function (error) {
+            console.log("Error getting document:", error);
         });
-        contador += 1;
+
     }
 
     if (props.question !== 8) {
